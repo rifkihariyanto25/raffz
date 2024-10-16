@@ -55,17 +55,9 @@ h1 {
     font-size: 32px;
     color: white;
     margin-bottom: 20px;
+    text-align: center;
 }
 
-.login-link {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.login-link a {
-    color: #FF6B35;
-    text-decoration: none;
-}
 
 .form-row {
     display: flex;
@@ -90,6 +82,13 @@ input[type="password"] {
     border-radius: 5px;
     background-color: #2C3E50;
     color: white;
+}
+
+input {
+    color: white;
+}
+::-ms-reveal {
+    filter: invert(100%);
 }
 
 .password-container {
@@ -120,7 +119,7 @@ input[type="password"] {
 }
 
 button {
-    width: 100%;
+    width: 106%;
     padding: 12px;
     border: none;
     border-radius: 5px;
@@ -137,6 +136,7 @@ button {
 
 .google-btn {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     background-color: #2C3E50;
