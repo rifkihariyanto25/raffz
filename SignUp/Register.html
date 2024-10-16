@@ -26,10 +26,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Username" />
+                    <input type="email" placeholder="Email" />
                 </div>
                 <div class="form-group password-container">
-                    <input type="password" placeholder="Enter your password" />
+                    <input type="password" id="passwordInput" placeholder="Enter your password" />
+                    <span id="toggleIcon" class="password-toggle" onclick="togglePassword()">👁</span>
                 </div>
                 <div class="checkbox-container">
                     <input type="checkbox" id="terms" />
@@ -48,3 +49,18 @@
 </body>
 
 </html>
+
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("passwordInput");
+        var passwordToggleIcon = document.getElementById("toggleIcon");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            passwordToggleIcon.textContent = "🙈"; // Ganti ke ikon mata tertutup
+        } else {
+            passwordField.type = "password";
+            passwordToggleIcon.textContent = "👁"; // Ganti ke ikon mata terbuka
+        }
+    }
+</script>

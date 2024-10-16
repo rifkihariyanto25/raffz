@@ -92,13 +92,6 @@ input[type="password"] {
     color: white;
 }
 
-input {
-    color: white;
-}
-::-ms-reveal {
-    filter: invert(100%);
-}
-
 .password-container {
     position: relative;
 }
@@ -127,7 +120,7 @@ input {
 }
 
 button {
-    width: 106%;
+    width: 100%;
     padding: 12px;
     border: none;
     border-radius: 5px;
@@ -151,7 +144,6 @@ button {
     padding: 12px;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
 }
 
 .google-btn img {
