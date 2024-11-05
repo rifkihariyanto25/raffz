@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pesanan Anda</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <img src="../Asset/logo.png" alt="Raffz Car Logo" class="logo" />
+        <div class="nav-links">
+          <a href="../Homepage/homepage.html">Home</a>
+          <a href="../Listmobil/daftarmobil.html">Daftar Mobil</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+
+        <div class="user-icon open-button" onclick="openForm()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 25 25">
+            <path
+              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7.753 18.305c-.261-.586-.789-.991-1.871-1.241-2.293-.529-4.428-.993-3.393-2.945 3.145-5.942.833-9.119-2.489-9.119-3.388 0-5.644 3.299-2.489 9.119 1.066 1.964-1.148 2.427-3.393 2.945-1.084.25-1.608.658-1.867 1.246-1.405-1.723-2.251-3.919-2.251-6.31 0-5.514 4.486-10 10-10s10 4.486 10 10c0 2.389-.845 4.583-2.247 6.305z"
+            />
+          </svg>
+        </div>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Login</h1>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required />
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required />
+
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </nav>
+
+      <h1 class="page-title">Pesanan Anda</h1>
+      <p class="page-subtitle">Lihat riwayat pesanan dan pesanan anda yang sedang berlangsung</p>
+
+      <!-- Order Card 1 -->
+      <div class="order-card">
+        <div class="car-image-container">
+          <div class="car-name">Mitsubishi Xpander</div>
+          <div class="car-year">2023</div>
+          <img src="../Asset/xpander.png" alt="Mitsubishi Xpander" class="car-image" />
+        </div>
+
+        <div class="order-details">
+          <div class="detail-row">
+            <div class="detail-label">Order ID</div>
+            <div class="detail-value">XP1001</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tanggal & Waktu</div>
+            <div class="detail-value">19/10/2024, 17:15</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tipe Transaksi</div>
+            <div class="detail-value">Payment</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Channel</div>
+            <div class="detail-value">DANA</div>
+          </div>
+        </div>
+
+        <div class="order-status">
+          <span class="status-badge status-processing">Sedang Diproses</span>
+        </div>
+
+        <div class="order-price">Rp 499.000</div>
+      </div>
+
+      <!-- Order Card 2 -->
+      <div class="order-card">
+        <div class="car-image-container">
+          <div class="car-name">Toyota Alphard</div>
+          <div class="car-year">2023</div>
+          <img src="../Asset/alphard.png" alt="Toyota Alphard" class="car-image" />
+        </div>
+
+        <div class="order-details">
+          <div class="detail-row">
+            <div class="detail-label">Order ID</div>
+            <div class="detail-value">XP1000</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tanggal & Waktu</div>
+            <div class="detail-value">19/10/2024, 17:15</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tipe Transaksi</div>
+            <div class="detail-value">Payment</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Channel</div>
+            <div class="detail-value">DANA</div>
+          </div>
+        </div>
+
+        <div class="order-status">
+          <span class="status-badge status-ongoing">Berlangsung</span>
+        </div>
+
+        <div class="order-price">Rp 499.000</div>
+      </div>
+
+      <!-- Order Card 3 -->
+      <div class="order-card">
+        <div class="car-image-container">
+          <div class="car-name">Suzuki Ertiga</div>
+          <div class="car-year">2023</div>
+          <img src="../Asset/sigra.png" alt="Hyundai palisade" class="car-image" />
+        </div>
+
+        <div class="order-details">
+          <div class="detail-row">
+            <div class="detail-label">Order ID</div>
+            <div class="detail-value">XP0999</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tanggal & Waktu</div>
+            <div class="detail-value">19/10/2024, 17:15</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Tipe Transaksi</div>
+            <div class="detail-value">Payment</div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Channel</div>
+            <div class="detail-value">DANA</div>
+          </div>
+        </div>
+
+        <div class="order-status">
+          <span class="status-badge status-completed">Selesai</span>
+        </div>
+
+        <div class="order-price">Rp 499.000</div>
+      </div>
+    </div>
+
+    <script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
