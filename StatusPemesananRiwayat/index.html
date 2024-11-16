@@ -1,103 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pesanan Anda</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesanan Anda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <img src="../Asset/logo.png" alt="Raffz Car Logo" class="logo" />
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Daftar Mobil</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="user-icon open-button" onclick="openForm()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 25 25">
+          <path
+            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7.753 18.305c-.261-.586-.789-.991-1.871-1.241-2.293-.529-4.428-.993-3.393-2.945 3.145-5.942.833-9.119-2.489-9.119-3.388 0-5.644 3.299-2.489 9.119 1.066 1.964-1.148 2.427-3.393 2.945-1.084.25-1.608.658-1.867 1.246-1.405-1.723-2.251-3.919-2.251-6.31 0-5.514 4.486-10 10-10s10 4.486 10 10c0 2.389-.845 4.583-2.247 6.305z" />
+        </svg>
+      </div>
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+          <h1>Login</h1>
+
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required />
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required />
+
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+    </nav>
+
     <div class="container">
-      <nav class="navbar">
-        <img src="../Asset/logo.png" alt="Raffz Car Logo" class="logo" />
-        <div class="nav-links">
-          <a href="#">Home</a>
-          <a href="#">Daftar Mobil</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </div>
+      <h2 class="title">Pesanan Anda</h2>
+      <p class="subtitle">Lihat riwayat pesanan dan pesanan anda yang sedang berlangsung</p>
 
-        <div class="user-icon open-button" onclick="openForm()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 25 25">
-            <path
-              d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7.753 18.305c-.261-.586-.789-.991-1.871-1.241-2.293-.529-4.428-.993-3.393-2.945 3.145-5.942.833-9.119-2.489-9.119-3.388 0-5.644 3.299-2.489 9.119 1.066 1.964-1.148 2.427-3.393 2.945-1.084.25-1.608.658-1.867 1.246-1.405-1.723-2.251-3.919-2.251-6.31 0-5.514 4.486-10 10-10s10 4.486 10 10c0 2.389-.845 4.583-2.247 6.305z"
-            />
-          </svg>
-        </div>
-        <div class="form-popup" id="myForm">
-          <form action="/action_page.php" class="form-container">
-            <h1>Login</h1>
-
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required />
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required />
-
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-          </form>
-        </div>
-      </nav>
-
-      <div class="container">
-        <h2 class="title">Pesanan Anda</h2>
-        <p class="subtitle">Lihat riwayat pesanan dan pesanan anda yang sedang berlangsung</p>
-      
-        <!-- Card 1 -->
-        <div class="order-card">
-          <div class="main-content">
-            <div class="car-box">
-              <div class="car-info">
-                <h3>Mitsubishi Xpander</h3>
-                <p>2023</p>
-              </div>
-              <img src="../Asset/xpander.png" alt="Mitsubishi Xpander">
+      <!-- Card 1 -->
+      <div class="order-card">
+        <div class="main-content">
+          <div class="car-box">
+            <div class="car-info">
+              <h3>Mitsubishi Xpander</h3>
+              <p>2023</p>
             </div>
-      
-            <div class="order-info">
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>ID Pesanan</label>
-                  <p>XP1001</p>
-                </div>
-                <div class="info-item">
-                  <label>Tipe Transaksi</label>
-                  <p>Payment</p>
-                </div>
-                <div class="status-section">
-                  <label>Status:</label>
-                  <span class="status-pill terlambat">Terlambat</span>
-                </div>
+            <img src="../Asset/xpander.png" alt="Mitsubishi Xpander">
+          </div>
+
+          <div class="order-info">
+            <div class="info-grid">
+              <div class="info-item">
+                <label>ID Pesanan</label>
+                <p>XP1001</p>
               </div>
-      
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>Tanggal & Waktu</label>
-                  <p>19/10/2024, 17:15</p>
-                </div>
-                <div class="info-item">
-                  <label>Channel</label>
-                  <p>DANA</p>
-                </div>
-                <div class="price-section">
-                  <div class="price-wrapper">
-                    <div class="warning-icon">
-                      !
-                      <div class="warning-tooltip">
-                        Keterlambatan 1 jam pertama bebas denda. Setelahnya, denda dihitung per 1 hari
-                        <div class="late-fee">
-                          Jumlah Denda: Rp 150.000/hari
-                        </div>
+              <div class="info-item">
+                <label>Tipe Transaksi</label>
+                <p>Payment</p>
+              </div>
+              <div class="status-section">
+                <label>Status:</label>
+                <span class="status-pill terlambat">Terlambat</span>
+              </div>
+            </div>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Tanggal & Waktu</label>
+                <p>19/10/2024, 17:15</p>
+              </div>
+              <div class="info-item">
+                <label>Channel</label>
+                <p>DANA</p>
+              </div>
+              <div class="price-section">
+                <div class="price-wrapper">
+                  <div class="warning-icon">
+                    !
+                    <div class="warning-tooltip">
+                      Keterlambatan 1 jam pertama bebas denda. Setelahnya, denda dihitung per 1 hari
+                      <div class="late-fee">
+                        Jumlah Denda: Rp 150.000/hari
                       </div>
                     </div>
+                  </div>
                   <p class="price">Rp 499.000</p>
                   <button class="detail-toggle">Detail Pesanan ▼</button>
                 </div>
               </div>
             </div>
           </div>
-      
+
           <div class="detail-section hidden">
             <div class="detail-grid">
               <div class="detail-item">
@@ -133,7 +134,7 @@
             </div>
           </div>
         </div>
-      
+
         <!-- Card 2 -->
         <div class="order-card">
           <div class="main-content">
@@ -144,7 +145,7 @@
               </div>
               <img src="../Asset/alphard.png" alt="Toyota Alphard">
             </div>
-      
+
             <div class="order-info">
               <div class="info-grid">
                 <div class="info-item">
@@ -160,7 +161,7 @@
                   <span class="status-pill">Berlangsung</span>
                 </div>
               </div>
-      
+
               <div class="info-grid">
                 <div class="info-item">
                   <label>Tanggal & Waktu</label>
@@ -177,7 +178,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="detail-section hidden">
             <div class="detail-grid">
               <div class="detail-item">
@@ -213,7 +214,7 @@
             </div>
           </div>
         </div>
-      
+
         <!-- Card 3 -->
         <div class="order-card">
           <div class="main-content">
@@ -224,7 +225,7 @@
               </div>
               <img src="../Asset/sigra.png" alt="Suzuki Ertiga">
             </div>
-      
+
             <div class="order-info">
               <div class="info-grid">
                 <div class="info-item">
@@ -240,7 +241,7 @@
                   <span class="status-pill">Berlangsung</span>
                 </div>
               </div>
-      
+
               <div class="info-grid">
                 <div class="info-item">
                   <label>Tanggal & Waktu</label>
@@ -257,32 +258,39 @@
               </div>
             </div>
           </div>
-      
+
           <div class="detail-section hidden">
             <!-- Similar detail section as Card 1 -->
           </div>
         </div>
       </div>
 
-    <script>
-      function openForm() {
-        document.getElementById("myForm").style.display = "block";
-      }
+      <script>
+        function openForm() {
+          document.getElementById("myForm").style.display = "block";
+        }
 
-      function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-      }
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+      </script>
 
-      document.querySelectorAll('.detail-toggle').forEach(button => {
-  button.addEventListener('click', function() {
-    const card = this.closest('.order-card');
-    const detailSection = card.querySelector('.detail-section');
-    const arrow = this.innerHTML.includes('▼') ? '▲' : '▼';
-    
-    detailSection.classList.toggle('hidden');
-    this.innerHTML = `Detail Pesanan ${arrow}`;
-  });
-});
-    </script>
-  </body>
+      <script>
+        document.querySelectorAll('.detail-toggle').forEach(button => {
+          button.addEventListener('click', function () {
+            const card = this.closest('.order-card');
+            const detailSection = card.querySelector('.detail-section');
+            const arrow = this.innerHTML.includes('▼') ? '▲' : '▼';
+
+            // Toggle classes for animation
+            detailSection.classList.toggle('hidden');
+            this.classList.toggle('hidden');
+
+            // Update button text
+            this.innerHTML = `Detail Pesanan ${arrow}`;
+          });
+        });
+      </script>
+</body>
+
 </html>

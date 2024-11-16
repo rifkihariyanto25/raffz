@@ -27,6 +27,7 @@ body {
   margin-bottom: 5rem;
 }
 
+
 .logo {
   height: 40px;
 }
@@ -283,6 +284,7 @@ body {
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
+
 /* Add styles to the form container */
 .form-container {
   max-width: 300px;
