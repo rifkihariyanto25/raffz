@@ -1,296 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pesanan Anda</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Anda</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="container">
-    <nav class="navbar">
-      <img src="../Asset/logo.png" alt="Raffz Car Logo" class="logo" />
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Daftar Mobil</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </div>
-
-      <div class="user-icon open-button" onclick="openForm()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 25 25">
-          <path
-            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7.753 18.305c-.261-.586-.789-.991-1.871-1.241-2.293-.529-4.428-.993-3.393-2.945 3.145-5.942.833-9.119-2.489-9.119-3.388 0-5.644 3.299-2.489 9.119 1.066 1.964-1.148 2.427-3.393 2.945-1.084.25-1.608.658-1.867 1.246-1.405-1.723-2.251-3.919-2.251-6.31 0-5.514 4.486-10 10-10s10 4.486 10 10c0 2.389-.845 4.583-2.247 6.305z" />
-        </svg>
-      </div>
-      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-          <h1>Login</h1>
-
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required />
-
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required />
-
-          <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-      </div>
-    </nav>
-
     <div class="container">
-      <h2 class="title">Pesanan Anda</h2>
-      <p class="subtitle">Lihat riwayat pesanan dan pesanan anda yang sedang berlangsung</p>
-
-      <!-- Card 1 -->
-      <div class="order-card">
-        <div class="main-content">
-          <div class="car-box">
-            <div class="car-info">
-              <h3>Mitsubishi Xpander</h3>
-              <p>2023</p>
+        <nav class="navbar">
+            <img src="../Asset/logo.png" alt="Raffz Car Logo" class="logo">
+            <div class="nav-links">
+                <a href="/Homepage/homepage.html">Home</a>
+                <a href="/Listmobil/daftarmobil.html">Daftar Mobil</a>
+                <a href="/Aboutpage/about.html">About</a>
+                <a href="/Kontak/Kontak.html">Contact</a>
             </div>
-            <img src="../Asset/xpander.png" alt="Mitsubishi Xpander">
-          </div>
-
-          <div class="order-info">
-            <div class="info-grid">
-              <div class="info-item">
-                <label>ID Pesanan</label>
-                <p>XP1001</p>
-              </div>
-              <div class="info-item">
-                <label>Tipe Transaksi</label>
-                <p>Payment</p>
-              </div>
-              <div class="status-section">
-                <label>Status:</label>
-                <span class="status-pill terlambat">Terlambat</span>
-              </div>
+            <div class="user-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#374151">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                </svg>
             </div>
+        </nav>
 
-            <div class="info-grid">
-              <div class="info-item">
-                <label>Tanggal & Waktu</label>
-                <p>19/10/2024, 17:15</p>
+        <h2 class="title">Pesanan Anda</h2>
+        <p class="subtitle">Lihat riwayat pesanan dan pesanan anda yang sedang berlangsung</p>
+
+        <div class="order-card">
+          <div class="order-header">
+              <div class="car-info">
+                  <h3>Mitsubishi Xpander</h3>
+                  <p>2023</p>
+                  <img src="../Asset/xpander.png" alt="Mitsubishi Xpander">
               </div>
-              <div class="info-item">
-                <label>Channel</label>
-                <p>DANA</p>
-              </div>
-              <div class="price-section">
-                <div class="price-wrapper">
-                  <div class="warning-icon">
-                    !
-                    <div class="warning-tooltip">
-                      Keterlambatan 1 jam pertama bebas denda. Setelahnya, denda dihitung per 1 hari
-                      <div class="late-fee">
-                        Jumlah Denda: Rp 150.000/hari
+              <div class="order-details">
+                  <div class="info-grid">
+                      <div class="info-item">
+                          <label>ID Pesanan</label>
+                          <p>XP1001</p>
                       </div>
-                    </div>
+                      <div class="info-item">
+                          <label>Tipe Transaksi</label>
+                          <p>Payment</p>
+                      </div>
+                      <div class="info-item" style="text-align: right;">
+                          <label>Status</label>
+                          <span class="status-pill sedang-diproses">Sedang Diproses</span>
+                      </div>
                   </div>
-                  <p class="price">Rp 499.000</p>
-                  <button class="detail-toggle">Detail Pesanan ▼</button>
-                </div>
+                  <div class="info-grid">
+                      <div class="info-item">
+                          <label>Tanggal & Waktu</label>
+                          <p>19/10/2024, 17:15</p>
+                      </div>
+                      <div class="info-item">
+                          <label>Channel</label>
+                          <p>DANA</p>
+                      </div>
+                      <div class="info-item">
+                          <p class="price">Rp 499.000</p>
+                          <button class="detail-toggle">Detail Pesanan ▼</button>
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
-
-          <div class="detail-section hidden">
-            <div class="detail-grid">
-              <div class="detail-item">
-                <label>Nama Pemesan</label>
-                <p>Ridwan Mirsod</p>
+          <div class="detail-content">
+              <div class="detail-grid">
+                  <div class="detail-item">
+                      <label>Nama Pemesan</label>
+                      <p>Ridwan Mirsod</p>
+                  </div>
+                  <div class="detail-item">
+                      <label>No. WhatsApp</label>
+                      <p>085267739885</p>
+                  </div>
+                  <div class="detail-item">
+                      <label>Waktu Jemput</label>
+                      <p>21/10/2024, 09:00</p>
+                  </div>
               </div>
-              <div class="detail-item">
-                <label>No. WhatsApp</label>
-                <p>085267739885</p>
+              <div class="detail-grid">
+                  <div class="detail-item">
+                      <label>Email</label>
+                      <p>ridwanm88@gmail.com</p>
+                  </div>
+                  <div class="detail-item">
+                      <label>Jenis Rental</label>
+                      <p>Dengan Sopir</p>
+                  </div>
+                  <div class="detail-item">
+                      <label>Waktu Kembali</label>
+                      <p>22/10/2024, 09:00</p>
+                  </div>
+                  <div class="detail-item catatan">
+                      <label>Catatan Khusus</label>
+                      <textarea readonly></textarea>
+                  </div>
               </div>
-              <div class="detail-item">
-                <label>Waktu Jemput</label>
-                <p>21/10/2024, 09:00</p>
-              </div>
-              <div class="detail-item catatan">
-                <label>Catatan Khusus</label>
-                <textarea readonly></textarea>
-              </div>
-            </div>
-            <div class="detail-grid">
-              <div class="detail-item">
-                <label>Email</label>
-                <p>ridwanm88@gmail.com</p>
-              </div>
-              <div class="detail-item">
-                <label>Jenis Rental</label>
-                <p>Dengan Sopir</p>
-              </div>
-              <div class="detail-item">
-                <label>Waktu Kembali</label>
-                <p>22/10/2024, 09:00</p>
-              </div>
-            </div>
           </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="order-card">
-          <div class="main-content">
-            <div class="car-box">
-              <div class="car-info">
-                <h3>Toyota Alphard</h3>
-                <p>2023</p>
-              </div>
-              <img src="../Asset/alphard.png" alt="Toyota Alphard">
-            </div>
-
-            <div class="order-info">
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>ID Pesanan</label>
-                  <p>XP1000</p>
-                </div>
-                <div class="info-item">
-                  <label>Tipe Transaksi</label>
-                  <p>Payment</p>
-                </div>
-                <div class="status-section">
-                  <label>Status:</label>
-                  <span class="status-pill">Berlangsung</span>
-                </div>
-              </div>
-
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>Tanggal & Waktu</label>
-                  <p>19/10/2024, 17:15</p>
-                </div>
-                <div class="info-item">
-                  <label>Channel</label>
-                  <p>DANA</p>
-                </div>
-                <div class="price-section">
-                  <p class="price">Rp 499.000</p>
-                  <button class="detail-toggle">Detail Pesanan ▼</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="detail-section hidden">
-            <div class="detail-grid">
-              <div class="detail-item">
-                <label>Nama Pemesan</label>
-                <p>Ridwan Mirsod</p>
-              </div>
-              <div class="detail-item">
-                <label>No. WhatsApp</label>
-                <p>085267739885</p>
-              </div>
-              <div class="detail-item">
-                <label>Waktu Jemput</label>
-                <p>21/10/2024, 09:00</p>
-              </div>
-              <div class="detail-item catatan">
-                <label>Catatan Khusus</label>
-                <textarea readonly></textarea>
-              </div>
-            </div>
-            <div class="detail-grid">
-              <div class="detail-item">
-                <label>Email</label>
-                <p>ridwanm88@gmail.com</p>
-              </div>
-              <div class="detail-item">
-                <label>Jenis Rental</label>
-                <p>Dengan Sopir</p>
-              </div>
-              <div class="detail-item">
-                <label>Waktu Kembali</label>
-                <p>22/10/2024, 09:00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="order-card">
-          <div class="main-content">
-            <div class="car-box">
-              <div class="car-info">
-                <h3>Suzuki Ertiga</h3>
-                <p>2023</p>
-              </div>
-              <img src="../Asset/sigra.png" alt="Suzuki Ertiga">
-            </div>
-
-            <div class="order-info">
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>ID Pesanan</label>
-                  <p>XP0999</p>
-                </div>
-                <div class="info-item">
-                  <label>Tipe Transaksi</label>
-                  <p>Payment</p>
-                </div>
-                <div class="status-section">
-                  <label>Status:</label>
-                  <span class="status-pill">Berlangsung</span>
-                </div>
-              </div>
-
-              <div class="info-grid">
-                <div class="info-item">
-                  <label>Tanggal & Waktu</label>
-                  <p>19/10/2024, 17:15</p>
-                </div>
-                <div class="info-item">
-                  <label>Channel</label>
-                  <p>DANA</p>
-                </div>
-                <div class="price-section">
-                  <p class="price">Rp 499.000</p>
-                  <button class="detail-toggle">Detail Pesanan ▼</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="detail-section hidden">
-            <!-- Similar detail section as Card 1 -->
-          </div>
-        </div>
       </div>
+      <div class="order-card">
+        <div class="order-header">
+            <div class="car-info">
+                <h3>Mitsubishi Xpander</h3>
+                <p>2023</p>
+                <img src="../Asset/xpander.png" alt="Mitsubishi Xpander">
+            </div>
+              <div class="order-details">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>ID Pesanan</label>
+                        <p>XP1001</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Tipe Transaksi</label>
+                        <p>Payment</p>
+                    </div>
+                    <div class="info-item" style="text-align: right;">
+                        <label>Status</label>
+                        <span class="status-pill terlambat">Terlambat</span>
+                    </div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Tanggal & Waktu</label>
+                        <p>19/10/2024, 17:15</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Channel</label>
+                        <p>DANA</p>
+                    </div>
+                    <div class="info-item price-section">
+                        <div class="price-wrapper">
+                            <div class="warning-icon">
+                                !
+                                <div class="warning-tooltip">
+                                    Keterlambatan 1 jam pertama bebas denda. Setelahnya, denda dihitung per 1 hari
+                                    <div class="late-fee">
+                                        Jumlah Denda: Rp 150.000/hari
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="price">Rp 499.000</p>
+                        </div>
+                        <a href="#" class="detail-toggle">Detail Pesanan ▼</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="detail-content">
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <label>Nama Pemesan</label>
+                    <p>Ridwan Mirsod</p>
+                </div>
+                <div class="detail-item">
+                    <label>No. WhatsApp</label>
+                    <p>085267739885</p>
+                </div>
+                <div class="detail-item">
+                    <label>Waktu Jemput</label>
+                    <p>21/10/2024, 09:00</p>
+                </div>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <label>Email</label>
+                    <p>ridwanm88@gmail.com</p>
+                </div>
+                <div class="detail-item">
+                    <label>Jenis Rental</label>
+                    <p>Dengan Sopir</p>
+                </div>
+                <div class="detail-item">
+                    <label>Waktu Kembali</label>
+                    <p>22/10/2024, 09:00</p>
+                </div>
+                <div class="detail-item catatan">
+                    <label>Catatan Khusus</label>
+                    <textarea readonly></textarea>
+                </div>
+            </div>
+        </div>
 
-      <script>
-        function openForm() {
-          document.getElementById("myForm").style.display = "block";
-        }
+    
 
-        function closeForm() {
-          document.getElementById("myForm").style.display = "none";
-        }
-      </script>
-
-      <script>
-        document.querySelectorAll('.detail-toggle').forEach(button => {
-          button.addEventListener('click', function () {
-            const card = this.closest('.order-card');
-            const detailSection = card.querySelector('.detail-section');
-            const arrow = this.innerHTML.includes('▼') ? '▲' : '▼';
-
-            // Toggle classes for animation
-            detailSection.classList.toggle('hidden');
-            this.classList.toggle('hidden');
-
-            // Update button text
-            this.innerHTML = `Detail Pesanan ${arrow}`;
+    <script>
+      document.querySelectorAll('.detail-toggle').forEach(button => {
+          button.addEventListener('click', function(e) {
+              e.preventDefault();
+              const card = this.closest('.order-card');
+              const detailContent = card.querySelector('.detail-content');
+              const arrow = this.innerHTML.includes('▼') ? '▲' : '▼';
+              
+              detailContent.classList.toggle('active');
+              this.innerHTML = `Detail Pesanan ${arrow}`;
           });
-        });
-      </script>
+      });
+  </script>
 </body>
-
 </html>
