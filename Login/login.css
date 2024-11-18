@@ -12,10 +12,13 @@ html {
 }
 
 .left-side {
-    flex: 1;
-    background-image: url('../Asset/Rental\ banner.png');
-    background-size: cover;
-    background-position: center;
+    /* flex: 1;
+    height: 1rem;
+    width: 2rem; */
+    /* background-image: url('../Asset/Rental\ banner.png'); */
+    /* background-size: auto; */
+    size: 80%;
+    /* background-position: center; */
 }
 
 .right-side {
@@ -87,6 +90,7 @@ input[type="password"] {
 input {
     color: white;
 }
+
 ::-ms-reveal {
     filter: invert(100%);
 }

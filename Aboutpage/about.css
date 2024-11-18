@@ -139,7 +139,7 @@ nav ul li a:hover {
 .team-member {
     position: relative;
     aspect-ratio: 1;
-    background-color: #ff5722;
+    background-color: #ffffff;
 }
 
 .member-image {
@@ -162,7 +162,7 @@ nav ul li a:hover {
     bottom: -15px;
     left: 20px;
     right: 20px;
-    background: white;
+    background: #ff5722;
     padding: 10px;
     text-align: center;
     z-index: 2;

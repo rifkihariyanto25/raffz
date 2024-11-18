@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config/config.php';
+include '../admin/config/config.php';
 
 if (isset($_POST['submit_kritik'])) {
     // Ambil data dari form
@@ -76,9 +76,9 @@ if (isset($_POST['submit_kritik'])) {
             <div class="contact-info">
                 <h2>Alamat Kami</h2>
                 <p><strong>Alamat Lengkap:</strong><br>
-                    Jl. HR Bunyamin RT 01 RW 01,<br>
-                    Kecamatan Purokerto Utara<br>
-                    Kabupaten Banyumas</p>
+                    Musholla Baitul Khoiriyah
+                    H67Q+6P6, Jl. Patriot, Gandasuli, Karangpucung, Kec. Purwokerto Sel., Kabupaten Banyumas, Jawa Tengah 53142</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.26596825065786!2d109.23917293655015!3d-7.4369568439838805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655f1af71bf93f%3A0x6d2c2e190899465a!2sMusholla%20Baitul%20Khoiriyah!5e0!3m2!1sid!2sid!4v1731925143542!5m2!1sid!2sid" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                 <p><strong>No. WhatsApp:</strong><br>
                     08292786143</p>
