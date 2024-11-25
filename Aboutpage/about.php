@@ -1,3 +1,6 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -10,7 +13,7 @@
 
 <body>
     <!-- Header remains the same -->
-    <header>
+    <!-- <header>
         <nav>
             <div class="logo">
                 <img src="../Asset/logo.png" alt="Raffz Car Logo">
@@ -28,7 +31,8 @@
                 </svg>
             </div>
         </nav>
-    </header>
+    </header> -->
+    <?php include '../navbar/navbar.php'; ?>
 
     <!-- Car Gallery Section remains the same -->
     <section class="car-gallery">

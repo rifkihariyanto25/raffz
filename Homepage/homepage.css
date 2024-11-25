@@ -22,24 +22,6 @@ body {
     margin: 0 auto;
 }
 
-/* Gaya navbar dengan sticky */
-header {
-    padding: 20px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    /* Add this to ensure header content is centered */
-    display: flex;
-    justify-content: center;
-}
-
-/* Menambahkan class untuk header saat di-scroll */
-header.scrolled {
-    padding: 10px 0;
-    /*background-color: rgb(252, 252, 254);  Sedikit transparan saat di-scroll */
-}
 
 /* Tambahkan padding-top pada body untuk mengkompensasi fixed header */
 body {
@@ -47,6 +29,23 @@ body {
     /* Sesuaikan dengan tinggi header */
 }
 
+/* Gaya untuk header */
+header {
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    /* background-color: white; */
+    /* Warna dasar untuk header */
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* Gaya untuk navigasi */
 nav {
     background-color: white;
     border-radius: 50px;
@@ -55,8 +54,11 @@ nav {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
 }
 
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -68,44 +70,55 @@ nav {
     margin-right: 12px;
 }
 
-.logo span {
-    font-weight: bold;
-    color: #ff6b35;
-}
-
+/* Menu list */
 nav ul {
     display: flex;
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
     margin: 0 15px;
 }
 
+/* Link default */
 nav ul li a {
     text-decoration: none;
     color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
 }
 
+/* Hover efek */
 nav ul li a:hover {
-    color: #ff6b35;
+    background-color: #f0f0f0;
+    color: #007BFF;
 }
 
+/* Gaya untuk menu aktif */
+nav ul li.active a {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+/* Ikon pengguna */
 .user-icon {
-    background-color: #f0f0f0;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
 }
 
 .user-icon i {
-    color: #333;
-    font-size: 40px;
+    color: #007BFF;
+    font-size: 16px;
 }
 
 /* Menambahkan animasi untuk smooth scroll */
@@ -205,7 +218,7 @@ html {
 
 .feature-card {
     background-color: #f5f5f5;
-    padding: 2rem;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;

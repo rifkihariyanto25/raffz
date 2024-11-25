@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .modal {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background-color: #112b57;
+            padding: 20px;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            background-color: #e0e0e0;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-body h2 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .modal-body p {
+            margin: 0 0 20px;
+            color: #777;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f8f8;
+        }
+
+        .menu-item img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .menu-item span {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="default-avatar.png" alt="Avatar" class="avatar" />
+            </div>
+            <div class="modal-body">
+                <h2>Ridwan Mirsod</h2>
+                <p>ridwanm88@gmail.com</p>
+                <div class="menu">
+                    <div class="menu-item">
+                        <img src="history-icon.png" alt="Riwayat" />
+                        <span>Riwayat Pesanan</span>
+                    </div>
+                    <div class="menu-item">
+                        <img src="logout-icon.png" alt="Keluar" />
+                        <span>Keluar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

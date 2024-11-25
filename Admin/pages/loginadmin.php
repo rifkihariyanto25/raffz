@@ -7,21 +7,23 @@ if (isset($_POST['login_admin'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Query untuk mendapatkan data admin berdasarkan username
     $result = $conn->query("SELECT * FROM login_admin WHERE username='$username'");
-    $login_admin = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $login_admin = $result->fetch_assoc();
 
-    // Validasi username dan password
-    if ($login_admin && $password == $login_admin['password']) { // Langsung mencocokkan password
-        $_SESSION['login_admin'] = $login_admin;
-        // Redirect ke halaman index.php
-        header("Location: ../index/index.php");
-        exit();
+        if ($password === $login_admin['password']) {
+            $_SESSION['login_admin'] = true;
+            $_SESSION['admin_data'] = $login_admin;
+            header("Location: ../index/index.php");
+            exit();
+        } else {
+            $error_message = "Password salah.";
+        }
     } else {
-        // Tampilkan pesan kesalahan jika login gagal
-        $error_message = "Username atau password salah.";
+        $error_message = "Username tidak ditemukan.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

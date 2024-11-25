@@ -16,10 +16,10 @@
     <nav class="navbar">
       <img src="../Asset/logo.png" alt="Logo" class="logo" />
       <div class="nav-links">
-        <a href="../Homepage/homepage.html">Home</a>
-        <a href="../Listmobil/daftarmobil.html">Daftar Mobil</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="../Homepage/homepage.php">Home</a>
+        <a href="../Listmobil/daftarmobildb.php">Daftar Mobil</a>
+        <a href="../Aboutpage/about.php">About</a>
+        <a href="../Kontak/Kontak.php">Contact</a>
       </div>
       <div class="user-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 25 25">

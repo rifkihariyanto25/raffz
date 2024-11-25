@@ -151,7 +151,7 @@ if (isset($_GET['code'])) {
                     <button type="submit" name="login">Login</button>
                 </form>
 
-                <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+                <p>Belum punya akun? <a href="../SignUp/Register.php">Daftar di sini</a></p>
                 <div class="social-login">
                     <a href="<?php echo $auth_url; ?>">
                         <img src="../Asset/web_light_sq_SU@1x.png" alt="button google">

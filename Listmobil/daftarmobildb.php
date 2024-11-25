@@ -2,6 +2,9 @@
 include '../admin/config/config.php';
 
 $mobil_result = $conn->query("SELECT * FROM mobil");
+
+$current_page = basename($_SERVER['PHP_SELF']);
+
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +14,14 @@ $mobil_result = $conn->query("SELECT * FROM mobil");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffz Car - Daftar Mobil</title>
-    <link rel="stylesheet" href="daftarmobil.css">
+    <link rel="stylesheet" href="daftarmobil.css?v=<?php echo time(); ?>" />
 </head>
 
+
+
 <body>
-    <header>
+    <?php include '../navbar/navbar.php'; ?>
+    <!-- <header>
         <div class="container">
             <nav>
                 <div class="logo">
@@ -35,7 +41,7 @@ $mobil_result = $conn->query("SELECT * FROM mobil");
                 </div>
             </nav>
         </div>
-    </header>
+    </header> -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">

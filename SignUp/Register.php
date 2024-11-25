@@ -39,7 +39,7 @@ if (isset($_POST['register'])) {
                 <?php if (isset($error_message)) echo "<p style='color:red;'>$error_message</p>"; ?>
 
                 <div class="login-link">
-                    Already have an account? <a href="login.php">Log in</a>
+                    Already have an account? <a href="../Login/login.php">Log in</a>
                 </div>
 
                 <form method="post">

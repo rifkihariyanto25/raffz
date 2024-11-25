@@ -1,3 +1,6 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -5,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffz Car - Homepage</title>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="homepage.css?v=<?php echo time(); ?>" />
 </head>
 
 <body>
@@ -13,7 +16,7 @@
     <div class="loader_bg">
         <div class="loader"></div>
     </div>
-    <header>
+    <!-- <header>
         <div class="container">
             <nav>
                 <div class="logo">
@@ -33,7 +36,8 @@
                 </div>
             </nav>
         </div>
-    </header>
+    </header> -->
+    <?php include '../navbar/navbar.php'; ?> <!-- Memanggil file navbar.php -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">

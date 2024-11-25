@@ -2,6 +2,11 @@
 session_start();
 include '../config/config.php';
 
+if (!isset($_SESSION['login_admin']) || $_SESSION['login_admin'] !== true) {
+    header("Location: ../pages/loginadmin.php");
+    exit(); // Menghentikan eksekusi lebih lanjut
+}
+
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 ?>
@@ -16,6 +21,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
     <link rel="stylesheet" href="../style.css?v=<?php echo time(); ?>" />
     <link rel="stylesheet" href="../script.js?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         .sidebar a {
             text-decoration: none;
@@ -41,10 +47,31 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             border-radius: 5px;
             overflow: hidden;
         }
+
+        .notification {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .notification.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 
 <body>
+    <div id="notification" class="notification"></div>
+
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -83,6 +110,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 </a>
             </div>
 
+            <div class="menu-item">
+                <a href="../pages/logout.php">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -114,6 +147,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             ?>
         </div>
     </div>
+
+
 
 </body>
 
