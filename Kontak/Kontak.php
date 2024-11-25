@@ -45,10 +45,10 @@ if (isset($_POST['submit_kritik'])) {
                 <img src="../Asset/logo.png" alt="Raffz Car Logo">
             </div>
             <ul>
-                <li><a href="/Homepage/homepage.html">Home</a></li>
-                <li><a href="../Listmobil/daftarmobil.html">Daftar Mobil</a></li>
-                <li><a href="/Aboutpage/about.html">About</a></li>
-                <li><a href="/Kontak/Kontak.html">Contact</a></li>
+                <li><a href="../Homepage/homepage.php">Home</a></li>
+                <li><a href="../Listmobil/daftarmobil.php">Daftar Mobil</a></li>
+                <li><a href="../Aboutpage/about.html">About</a></li>
+                <li><a href="../Kontak/Kontak.php">Contact</a></li>
             </ul>
             <div class="user-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

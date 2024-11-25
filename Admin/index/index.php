@@ -4,7 +4,6 @@ include '../config/config.php';
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
-// include '../includes/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +13,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RAFZZ Car - Admin Pages</title>
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../script.js">
+    <link rel="stylesheet" href="../style.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="../script.js?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .sidebar a {
@@ -116,7 +115,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
         </div>
     </div>
 
-    <!-- <?php include '../includes/footer.php'; ?> -->
 </body>
 
 </html>

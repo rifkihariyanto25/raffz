@@ -136,6 +136,7 @@ button {
 
 .social-login {
     margin-top: 20px;
+    align-items: center;
 }
 
 .google-btn {

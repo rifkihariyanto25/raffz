@@ -228,6 +228,9 @@ if (isset($_POST['delete_mobil'])) {
                         </select>
                     </td>
                     <td class="action-buttons">
+                        <button type="button" class="btn-view" data-id="<?= $mobil['id_mobil'] ?>">
+                            <i class="fas fa-eye"></i>
+                        </button>
                         <button type="button" class="btn-edit">
                             <i class="fas fa-edit"></i>
                         </button>
@@ -521,6 +524,8 @@ if (isset($_POST['delete_mobil'])) {
         });
     </script>
 </div>
+
+<!-- view mobil -->
 
 </div>
 </div>

@@ -1,4 +1,6 @@
 <?php
+
+date_default_timezone_set('Asia/Jakarta');
 session_start();
 include '../admin/config/config.php';
 
@@ -13,6 +15,104 @@ if (isset($_POST['login'])) {
         exit();
     } else {
         $error_message = "Email atau password salah.";
+    }
+}
+
+
+// panggil library
+require_once 'vendor/autoload.php';
+
+use Google\Service\Oauth2;
+use Google\Client;
+
+$client_id = '273853361585-8s9r9s5hr0fa2c4b8qrbqiipcr0ecbeb.apps.googleusercontent.com';
+$client_secret = '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';
+$redirect__uri = 'http://localhost/trial/Login/login.php';
+
+
+// inisiasi google 
+try {
+    $client = new Client();
+    $client->setClientId($client_id);
+    $client->setClientSecret($client_secret);
+    $client->setRedirectUri($redirect__uri);
+
+    // Tambahan konfigurasi
+    $client->setAccessType('offline');
+    $client->setPrompt('select_account');
+    $client->setIncludeGrantedScopes(true);
+
+    $client->addScope('email');
+    $client->addScope('profile');
+
+    // Generate auth URL
+    $auth_url = $client->createAuthUrl();
+} catch (Exception $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+
+// insert db google sql
+if (isset($_GET['code'])) {
+    try {
+        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+
+        if (!isset($token['error'])) {
+            $client->setAccessToken($token['access_token']);
+
+            // inisiasi google oauth
+            $service = new Oauth2($client);
+            $profile = $service->userinfo->get();
+
+            // tampung data dari akun google
+            $g_name = mysqli_real_escape_string($conn, $profile->name);
+            $g_email = mysqli_real_escape_string($conn, $profile->email);
+            $g_id = mysqli_real_escape_string($conn, $profile->id);
+            $currtime = date('Y-m-d H:i:s');
+
+            // Check existing user
+            $query_check = "SELECT * FROM db_login_google WHERE oauth_id = '$g_id'";
+            $run_query_check = mysqli_query($conn, $query_check);
+
+            if (!$run_query_check) {
+                throw new Exception("Database error: " . mysqli_error($conn));
+            }
+
+            if (mysqli_num_rows($run_query_check) > 0) {
+                // Update existing user
+                $query_update = "UPDATE db_login_google SET 
+                    fullname = '$g_name', 
+                    email = '$g_email', 
+                    last_login = '$currtime' 
+                    WHERE oauth_id = '$g_id'";
+
+                if (!mysqli_query($conn, $query_update)) {
+                    throw new Exception("Update failed: " . mysqli_error($conn));
+                }
+            } else {
+                // Insert new user
+                $query_insert = "INSERT INTO db_login_google (fullname, email, oauth_id, last_login) 
+                    VALUES ('$g_name', '$g_email', '$g_id', '$currtime')";
+
+                if (!mysqli_query($conn, $query_insert)) {
+                    throw new Exception("Insert failed: " . mysqli_error($conn));
+                }
+            }
+
+            // Set session variables
+            session_start();
+            $_SESSION['user_email'] = $g_email;
+            $_SESSION['user_name'] = $g_name;
+            $_SESSION['logged_in'] = true;
+
+            echo "Login Berhasil";
+            // Redirect ke halaman dashboard atau home
+            header("Location: ../Homepage/homepage.php");
+            exit();
+        } else {
+            throw new Exception("Token error: " . $token['error']);
+        }
+    } catch (Exception $e) {
+        echo "Login Gagal: " . $e->getMessage();
     }
 }
 ?>
@@ -53,10 +153,9 @@ if (isset($_POST['login'])) {
 
                 <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
                 <div class="social-login">
-                    <div class="google-btn">
-                        <img src="https://www.google.com/favicon.ico" alt="Google" width="20" height="20" />
-                        Google
-                    </div>
+                    <a href="<?php echo $auth_url; ?>">
+                        <img src="../Asset/web_light_sq_SU@1x.png" alt="button google">
+                    </a>
                 </div>
             </div>
         </div>
