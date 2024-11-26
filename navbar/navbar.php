@@ -1,3 +1,29 @@
+<?php
+session_start();
+include '../admin/config/config.php';
+
+// Validasi apakah pengguna sudah login
+$is_logged_in = isset($_SESSION['user1']);
+$namaLengkap = '';
+$email = '';
+
+// Ambil data pengguna jika sudah login
+if ($is_logged_in && isset($_SESSION['user1']['id'])) {
+    $userId = $_SESSION['user1']['id'];
+    $query = "SELECT nama_depan, nama_belakang, email FROM user1 WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $userId); // 'i' untuk tipe data integer
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $namaLengkap = htmlspecialchars($user['nama_depan'] . ' ' . $user['nama_belakang']);
+        $email = htmlspecialchars($user['email']);
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -360,28 +386,28 @@
             <i class="fas fa-user"></i>
         </button>
 
-        <div class="form-popup" id="myForm">
+        <div class="form-popup" id="myForm" <?= $is_logged_in ?>
             <div class="form-container">
-                <div class="popup-header">
-                    <span class="user-modal-close" onclick="closeUserModal()">&times;</span>
-                </div>
-                <div class="profile-pic-container">
-                    <i class="profile-pic fas fa-user"></i>
-                </div>
-                <div class="popup-body">
-                    <h3 class="name">Ridwan Fufufafa</h3>
-                    <p class="email">chilipari@gmail.com</p>
-                </div>
-
-                <div class="popup-actions">
-                    <button class="action-button">
-                        <span class="icon">&#8634;</span> <a href="../StatusPemesananRiwayat/index.php" class="no-underline">Riwayat Pesanan</a>
-                    </button>
-                    <button class="action-button logout">
-                        <span class="fas fa-sign-out-alt"></span> Keluar
-                    </button>
-                </div>
+            <div class="popup-header">
+                <span class="user-modal-close" onclick="closeUserModal()">&times;</span>
             </div>
+            <div class="profile-pic-container">
+                <i class="profile-pic fas fa-user"></i>
+            </div>
+            <div class="popup-body">
+                <h3 class="name"><?= $namaLengkap; ?></h3>
+                <p class="email"><?= $email; ?></p>
+            </div>
+
+            <div class="popup-actions">
+                <button class="action-button">
+                    <span class="icon">&#8634;</span> <a href="../StatusPemesananRiwayat/index.php" class="no-underline">Riwayat Pesanan</a>
+                </button>
+                <button class="action-button logout">
+                    <span class="fas fa-sign-out-alt"></span> Keluar
+                </button>
+            </div>
+        </div>
         </div>
 
         <div class="welcome-popup" id="myForm">
@@ -414,7 +440,8 @@
 <script>
     function checkLoginStatus() {
 
-        const isLoggedIn = false;
+        const isLoggedIn = <?php echo json_encode($is_logged_in); ?>; // Menggunakan json_encode untuk memastikan nilai boolean
+
 
         const formPopup = document.querySelector('.form-popup');
         const welcomePopup = document.querySelector('.welcome-popup');
@@ -452,7 +479,7 @@
 
         if (registerButton) {
             registerButton.addEventListener('click', function() {
-                window.location.href = '../Register/register.php';
+                window.location.href = '../SignUp/register.php';
             });
         }
 

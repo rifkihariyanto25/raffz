@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../admin/config/config.php';
 
 if (isset($_POST['submit_kritik'])) {

@@ -33,7 +33,7 @@ if (isset($_POST['login_admin'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Raffz Car</title>
-    <link rel="stylesheet" href="../../loginadmin/style.css ?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="../admin.css ?v=<?php echo time(); ?>" />
 </head>
 
 <body>
