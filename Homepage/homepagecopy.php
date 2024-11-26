@@ -17,7 +17,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="loader"></div>
     </div>
 
-    <?php include '../navbar/navbar.php'; ?> <!-- Memanggil file navbar.php -->
+    <?php include '../navbar/navbarcopy.php'; ?> <!-- Memanggil file navbar.php -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">
