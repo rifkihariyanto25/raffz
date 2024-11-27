@@ -1,5 +1,10 @@
 <?php
-include '../admin/config/config.php'; // Menghubungkan ke database
+include '../admin/config/config.php';
+
+$nama_mobil = isset($_GET['nama_mobil']) ? htmlspecialchars($_GET['nama_mobil']) : '';
+$harga_per_hari = isset($_GET['harga_per_hari']) ? htmlspecialchars($_GET['harga_per_hari']) : '';
+$foto_mobil = isset($_GET['foto_mobil']) ? htmlspecialchars($_GET['foto_mobil']) : '';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data dari form
@@ -76,35 +81,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             <div class="form-section">
                 <h2>Informasi Pemesan</h2>
 
-                <form method="post">
-                    <div class="form-group">
-                        <label>Nama Lengkap (Sesuai KTP)</label>
-                        <input type="text" name="nama_lengkap" placeholder="Nama lengkap" required>
-                    </div>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input
+                        type="text"
+                        name="nama_lengkap"
+                        value="<?= $namaLengkap ?>"
+                        readonly
+                        required>
+                </div>
 
-                    <div class="form-group">
-                        <label>No. WhatsApp</label>
-                        <input type="tel" name="whatsapp" placeholder="Nomor WhatsApp" required>
-                    </div>
+                <div class="form-group">
+                    <label>No. WhatsApp</label>
+                    <input type="tel" name="whatsapp" placeholder="Nomor WhatsApp" required>
+                </div>
 
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" placeholder="Email" required>
-                    </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value="<?= $email ?>"
+                        readonly
+                        required>
+                </div>
 
-                    <div class="form-group">
-                        <h3>Pilihan Sopir</h3>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="driver_option" value="Dengan Sopir" id="agree" onchange="showDriverForm()" required>
-                                <label for="agree">Dengan Sopir</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="driver_option" value="Lepas Kunci" id="disagree" onchange="showSelfDriveForm()" required>
-                                <label for="disagree">Lepas Kunci</label>
-                            </div>
+                <div class="form-group">
+                    <h3>Pilihan Sopir</h3>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="driver_option" value="Dengan Sopir" id="agree" onchange="showDriverForm()" required>
+                            <label for="agree">Dengan Sopir</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="driver_option" value="Lepas Kunci" id="disagree" onchange="showSelfDriveForm()" required>
+                            <label for="disagree">Lepas Kunci</label>
                         </div>
                     </div>
+                </div>
 
             </div>
 
@@ -123,12 +137,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 
                 <div class="form-group">
                     <h3>Alur Tanggal</h3>
-                    <input type="date" name="pickup_date" placeholder="Tanggal Pengambilan" required>
+                    <label for="pickup_date">Tanggal Pengambilan</label>
+                    <input type="date" id="pickup_date" name="pickup_date" placeholder="Tanggal Pengambilan" required oninput="updateSummary()">
                 </div>
                 <div class="form-group">
-                    <input type="date" name="return_date" placeholder="Tanggal Pengembalian" required>
+                    <label for="return_date">Tanggal Pengembalian</label>
+                    <input type="date" id="return_date" name="return_date" placeholder="Tanggal Pengembalian" required oninput="updateSummary()">
                 </div>
-
 
             </div>
 
@@ -162,20 +177,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             <div class="summary-card">
                 <h2>Ringkasan Pesanan</h2>
                 <div class="car-preview">
-                    <img src="/Asset/alphard.png" alt="Car Preview">
+                    <img src="../admin/index/img/<?= $foto_mobil ?>" alt="Car Preview">
                     <div class="car-details">
-                        <h3>Mitsubishi Xpander</h3>
-                        <p>By Admin</p>
+                        <h3><?= $nama_mobil ?></h3>
                     </div>
                 </div>
 
                 <div class="detail-row">
                     <span>Tanggal Pengambilan</span>
-                    <span>22/10/2024</span>
+                    <span id="pickup_date_summary">-</span>
                 </div>
                 <div class="detail-row">
                     <span>Tanggal Pengembalian</span>
-                    <span>23/10/2024</span>
+                    <span id="return_date_summary">-</span>
                 </div>
             </div>
         </div>
@@ -184,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             <div class="total-section-card">
                 <div class="detail-row">
                     <strong>Total Harga</strong>
-                    <strong>Rp450.000</strong>
+                    <strong id="total_price">Rp0</strong>
                 </div>
                 <input type="text" placeholder="Kode Unik Pembayaran" class="payment-input">
                 <button type="submit" class="submit-btn">BUAT PESANAN</button>
@@ -254,4 +268,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
         openMapsOnClick('pickup_location', 'pickup'); // Untuk form penjemputan
         openMapsOnClick('return_location', 'return'); // Untuk form pengembalian
     });
+</script>
+
+
+<script>
+    function updateSummary() {
+        const pickupDate = document.getElementById('pickup_date').value;
+        const returnDate = document.getElementById('return_date').value;
+
+        document.getElementById('pickup_date_summary').textContent = pickupDate || '-';
+        document.getElementById('return_date_summary').textContent = returnDate || '-';
+
+        if (pickupDate && returnDate) {
+            const pickup = new Date(pickupDate);
+            const returnD = new Date(returnDate);
+
+            const timeDiff = returnD - pickup;
+            let daysDiff = timeDiff / (1000 * 60 * 60 * 24);
+
+            daysDiff = daysDiff >= 0 ? daysDiff + 1 : 0;
+
+            if (daysDiff > 0) {
+                const pricePerDay = <?= $harga_per_hari ?>;
+                const totalPrice = daysDiff * pricePerDay;
+
+                document.getElementById('total_price').textContent = `Rp${totalPrice.toLocaleString('id-ID')}`;
+            } else {
+                document.getElementById('total_price').textContent = 'Tanggal tidak valid';
+            }
+        } else {
+            document.getElementById('total_price').textContent = 'Rp0';
+        }
+    }
 </script>

@@ -61,7 +61,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                     <path d="M11 6H8C7.05719 6 6.58579 6 6.29289 6.29289C6 6.58579 6 7.05719 6 8C6 8.94281 6 9.41421 6.29289 9.70711C6.58579 10 7.05719 10 8 10H11C11.9428 10 12.4142 10 12.7071 9.70711C13 9.41421 13 8.94281 13 8C13 7.05719 13 6.58579 12.7071 6.29289C12.4142 6 11.9428 6 11 6Z" stroke="#1C274C" stroke-width="1.5" />
                                 </svg></i></li>
                     </ul>
-                    <a href="/HalamanSewa/sewa.html" class="rent-btn">Sewa Sekarang</a>
+                    <a href="../HalamanSewa/sewa.php?nama_mobil=<?= urlencode($mobil['nama_mobil']) ?>&harga_per_hari=<?= urlencode($mobil['harga_per_hari']) ?>&foto_mobil=<?= urlencode($mobil['foto_mobil']) ?>" class="rent-btn">Sewa Sekarang</a>
+
                 </div>
             <?php endwhile ?>
         </div>
