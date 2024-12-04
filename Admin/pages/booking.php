@@ -1,6 +1,7 @@
 <?php
 
 $booking_result = $conn->query("SELECT * FROM bookings");
+
 // Fungsi konfirmasi booking
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset($_POST['konfirmasi'])) {
     $booking_id = intval($_POST['id_booking']);
@@ -14,8 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     $stmt->bind_param('i', $booking_id);
 
     if ($stmt->execute()) {
-        echo "Pesanan berhasil dikonfirmasi!";
-        header("Location: index.php#bookingPage");
+        echo "<script>alert('Pesanan berhasil dikonfirmasi!'); window.location.href='index.php#bookingPage';</script>";
         exit;
     } else {
         echo "Error: " . $stmt->error;
@@ -24,12 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     $stmt->close();
 }
 
-
 // Fungsi hapus booking
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset($_POST['hapus'])) {
     $booking_id = intval($_POST['id_booking']);
 
-    // Query untuk menghapus data booking
     $sql = "DELETE FROM bookings WHERE booking_id = ?";
     $stmt = $conn->prepare($sql);
 
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     $stmt->bind_param('i', $booking_id);
 
     if ($stmt->execute()) {
-        header("Location: index.php#bookingPage");
+        echo "<script>alert('Pesanan berhasil dihapus!'); window.location.href='index.php#bookingPage';</script>";
         exit;
     } else {
         echo "Gagal menghapus data: " . $stmt->error;
@@ -50,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 }
 
 ?>
-
 
 <div class="header">
     <h2>Data Booking</h2>
@@ -88,24 +85,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
                         <td><?= htmlspecialchars($booking['pickup_location']) ?></td>
                         <td><?= htmlspecialchars($booking['whatsapp']) ?></td>
                         <td><?= htmlspecialchars($booking['driver_option']) ?></td>
-                        <td id="status-<?= $booking['booking_id'] ?>">
+                        <td>
                             <?= $booking['status_konfirmasi'] == 'Sudah Dikonfirmasi' ? 'Dikonfirmasi' : 'Belum Dikonfirmasi' ?>
                         </td>
-                        <td class="action-buttons">
-                            <!-- Tombol konfirmasi -->
-                            <button
-                                type="button"
-                                class="btn-view"
-                                onclick="konfirmasiPesanan(<?= $booking['booking_id'] ?>)">
-                                <i class="fas fa-check"></i>
-                            </button>
+                        <td>
+                            <!-- Form konfirmasi -->
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="id_booking" value="<?= $booking['booking_id'] ?>">
+                                <button type="submit" name="konfirmasi" class="btn-view">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
 
-                            <!-- Tombol hapus -->
-                            <button
-                                <button type="button" class="btn-delete"
-                                onclick="hapusPesanan(<?= $booking['booking_id'] ?>)">
-                                <i class="fas fa-trash" "></i>
-                            </button>
+                            <!-- Form hapus -->
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="id_booking" value="<?= $booking['booking_id'] ?>">
+                                <button type="submit" name="hapus" class="btn-delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 <?php
@@ -113,15 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             } else {
                 ?>
                 <tr>
-                    <td colspan=" 7">Belum ada data booking.
-                        </td>
-                    </tr>
-                <?php
+                    <td colspan="7">Belum ada data booking.</td>
+                </tr>
+            <?php
             }
-                ?>
+            ?>
         </tbody>
-
     </table>
 </div>
-</div>
-</body>
