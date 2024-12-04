@@ -5,13 +5,21 @@ session_start();
 include '../admin/config/config.php';
 
 if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+    // Ambil input dari form
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
+
+    // Cek di database
     $result = $conn->query("SELECT * FROM user1 WHERE email='$email'");
     $user = $result->fetch_assoc();
+
     if ($user && password_verify($password, $user['password'])) {
+        // Simpan informasi pengguna ke sesi
         $_SESSION['user1'] = $user;
-        header("Location: ../Homepage/homepage.php");
+
+        // Redirect ke halaman sebelumnya atau homepage
+        $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '../Homepage/homepage.php';
+        header("Location: ../HalamanSewa/sewa.php");
         exit();
     } else {
         $error_message = "Email atau password salah.";

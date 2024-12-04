@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 
     if ($stmt->execute()) {
         echo "Pesanan berhasil dikonfirmasi!";
-        header("Location: manage_mobil.php#bookingPage");
+        header("Location: index.php#bookingPage");
         exit;
     } else {
         echo "Error: " . $stmt->error;
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     $stmt->bind_param('i', $booking_id);
 
     if ($stmt->execute()) {
-        header("Location: manage_mobil.php#bookingPage");
+        header("Location: index.php#bookingPage");
         exit;
     } else {
         echo "Gagal menghapus data: " . $stmt->error;
@@ -81,35 +81,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             if ($booking_result->num_rows > 0) {
                 $nomor = 1;
                 while ($booking = $booking_result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $nomor++ . "</td>";
-                    echo "<td>" . htmlspecialchars($booking['nama_lengkap']) . "</td>";
-                    echo "<td>" . htmlspecialchars($booking['pickup_location']) . "</td>";
-                    echo "<td>" . htmlspecialchars($booking['whatsapp']) . "</td>";
-                    echo "<td>" . htmlspecialchars($booking['driver_option']) . "</td>";
-                    echo "<td id='status-" . $booking['booking_id'] . "'>" . ($booking['status_konfirmasi'] == 'Sudah Dikonfirmasi' ? 'Dikonfirmasi' : 'Belum Dikonfirmasi') . "</td>";
-                    echo "<td>";
+            ?>
+                    <tr>
+                        <td><?= $nomor++ ?></td>
+                        <td><?= htmlspecialchars($booking['nama_lengkap']) ?></td>
+                        <td><?= htmlspecialchars($booking['pickup_location']) ?></td>
+                        <td><?= htmlspecialchars($booking['whatsapp']) ?></td>
+                        <td><?= htmlspecialchars($booking['driver_option']) ?></td>
+                        <td id="status-<?= $booking['booking_id'] ?>">
+                            <?= $booking['status_konfirmasi'] == 'Sudah Dikonfirmasi' ? 'Dikonfirmasi' : 'Belum Dikonfirmasi' ?>
+                        </td>
+                        <td class="action-buttons">
+                            <!-- Tombol konfirmasi -->
+                            <button
+                                type="button"
+                                class="btn-view"
+                                onclick="konfirmasiPesanan(<?= $booking['booking_id'] ?>)">
+                                <i class="fas fa-check"></i>
+                            </button>
 
-                    // Tombol konfirmasi
-                    echo "<form method='POST' action='' style='display:inline;'>";
-                    echo "<input type='hidden' name='id_booking' value='" . $booking['booking_id'] . "'>";
-                    echo "<button type='submit' name='konfirmasi' class='btn-konfirmasi'>Konfirmasi</button>";
-                    echo "</form>";
-
-                    // Form untuk hapus
-                    echo "<form method='POST' action='' style='display:inline;' onsubmit='return confirm(\"Apakah Anda yakin ingin menghapus pesanan ini?\");'>";
-                    echo "<input type='hidden' name='id_booking' value='" . $booking['booking_id'] . "'>";
-                    echo "<button type='submit' name='hapus' class='btn-hapus'>Hapus</button>";
-                    echo "</form>";
-
-                    echo "</td>";
-                    echo "</tr>";
+                            <!-- Tombol hapus -->
+                            <button
+                                <button type="button" class="btn-delete"
+                                onclick="hapusPesanan(<?= $booking['booking_id'] ?>)">
+                                <i class="fas fa-trash" "></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php
                 }
             } else {
-                echo "<tr><td colspan='7'>Belum ada data booking.</td></tr>";
+                ?>
+                <tr>
+                    <td colspan=" 7">Belum ada data booking.
+                        </td>
+                    </tr>
+                <?php
             }
-            ?>
+                ?>
         </tbody>
+
     </table>
 </div>
 </div>

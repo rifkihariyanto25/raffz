@@ -30,8 +30,6 @@ body {
     /* Sesuaikan dengan tinggi header */
 }
 
-
-
 /* Menambahkan animasi untuk smooth scroll */
 html {
     scroll-behavior: smooth;
@@ -90,23 +88,37 @@ select {
 }
 
 .car-preview {
-    background: #282F63;
-    padding: 20px;
-    width: 100%;
-    border-radius: 15px;
-    color: white;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
-.car-details {
-    margin-top: 20px;
+/* .car-preview img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+} */
+
+
+.car-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .detail-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
 
+.detail-row span {
+    font-size: 14px;
+    color: #555;
 }
 
 .total-section {

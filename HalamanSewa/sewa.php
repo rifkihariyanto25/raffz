@@ -61,6 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 
     $stmt->close();
 }
+
+// if (!isset($_SESSION['user1']) || $_SESSION['user1'] !== true) {
+//     header('Location: ../Login/login.php');
+//     exit;
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -69,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffz Car - Halaman Sewa</title>
-    <link rel="stylesheet" href="sewa.css">
+    <link rel="stylesheet" href="sewa.css?v=<?php echo time(); ?>" />
 </head>
 
 <body>
@@ -77,133 +83,139 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
     <?php include '../navbar/navbar.php'; ?>
 
     <div class="container">
-        <div class="main-content">
-            <div class="form-section">
-                <h2>Informasi Pemesan</h2>
+        <form action="" method="POST">
+            <div class="main-content">
+                <div class="form-section">
+                    <h2>Informasi Pemesan</h2>
 
-                <div class="form-group">
-                    <label>Nama Lengkap</label>
-                    <input
-                        type="text"
-                        name="nama_lengkap"
-                        value="<?= $namaLengkap ?>"
-                        readonly
-                        required>
-                </div>
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input
+                            type="text"
+                            name="nama_lengkap"
+                            value="<?= $namaLengkap ?>"
+                            readonly
+                            required>
+                    </div>
 
-                <div class="form-group">
-                    <label>No. WhatsApp</label>
-                    <input type="tel" name="whatsapp" placeholder="Nomor WhatsApp" required>
-                </div>
+                    <div class="form-group">
+                        <label>No. WhatsApp</label>
+                        <input type="tel" name="whatsapp" placeholder="Nomor WhatsApp" required>
+                    </div>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value="<?= $email ?>"
-                        readonly
-                        required>
-                </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value="<?= $email ?>"
+                            readonly
+                            required>
+                    </div>
 
-                <div class="form-group">
-                    <h3>Pilihan Sopir</h3>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" name="driver_option" value="Dengan Sopir" id="agree" onchange="showDriverForm()" required>
-                            <label for="agree">Dengan Sopir</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" name="driver_option" value="Lepas Kunci" id="disagree" onchange="showSelfDriveForm()" required>
-                            <label for="disagree">Lepas Kunci</label>
+                    <div class="form-group">
+                        <h3>Pilihan Sopir</h3>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="driver_option" value="Dengan Sopir" id="agree" onchange="showDriverForm()" required>
+                                <label for="agree">Dengan Sopir</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="driver_option" value="Lepas Kunci" id="disagree" onchange="showSelfDriveForm()" required>
+                                <label for="disagree">Lepas Kunci</label>
+                            </div>
                         </div>
                     </div>
+
+                </div>
+
+
+                <div class="form-section driver-form" style="display: none;">
+                    <h2>Detail Pemesanan</h2>
+                    <div class="form-group">
+                        <h3>Alur Lokasi</h3>
+                        <label for="pickup_location">Lokasi Jemput</label>
+                        <input type="text" id="pickup_location" name="pickup_location" placeholder="Pilih lokasi jemput" onclick="openMap('pickup')" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="return_location">Lokasi Pengembalian</label>
+                        <input type="text" id="return_location" name="return_location" placeholder="Pilih lokasi pengembalian" onclick="openMap('return')" required>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Alur Tanggal</h3>
+                        <label for="pickup_date">Tanggal Pengambilan</label>
+                        <input type="date" id="pickup_date" name="pickup_date" placeholder="Tanggal Pengambilan" required oninput="updateSummary()">
+                    </div>
+                    <div class="form-group">
+                        <label for="return_date">Tanggal Pengembalian</label>
+                        <input type="date" id="return_date" name="return_date" placeholder="Tanggal Pengembalian" required oninput="updateSummary()">
+                    </div>
+
+                </div>
+
+                <div class="form-section self-drive-form" style="display: none;">
+                    <h2>Detail Pemesanan</h2>
+                    <div class="form-group">
+                        <h3>Alur Lokasi</h3>
+                        <select>
+                            <option>Lokasi Pengambilan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select>
+                            <option>Lokasi Pengembalian</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <h3>Alur Tanggal</h3>
+                        <input type="date" placeholder="Tanggal Pengambilan">
+                    </div>
+                    <div class="form-group">
+                        <input type="date" placeholder="Tanggal Pengembalian">
+                    </div>
+
+
                 </div>
 
             </div>
+            <div class="summary-section sticky-summary">
+                <div class="summary-card">
+                    <h2>Ringkasan Pesanan</h2>
+                    <div class="car-preview">
+                        <img src="../admin/index/img/<?= $foto_mobil ?>" alt="Car Preview">
 
-
-            <div class="form-section driver-form" style="display: none;">
-                <h2>Detail Pemesanan</h2>
-                <div class="form-group">
-                    <h3>Alur Lokasi</h3>
-                    <label for="pickup_location">Lokasi Jemput</label>
-                    <input type="text" id="pickup_location" name="pickup_location" placeholder="Pilih lokasi jemput" onclick="openMap('pickup')" required>
-                </div>
-                <div class="form-group">
-                    <label for="return_location">Lokasi Pengembalian</label>
-                    <input type="text" id="return_location" name="return_location" placeholder="Pilih lokasi pengembalian" onclick="openMap('return')" required>
-                </div>
-
-                <div class="form-group">
-                    <h3>Alur Tanggal</h3>
-                    <label for="pickup_date">Tanggal Pengambilan</label>
-                    <input type="date" id="pickup_date" name="pickup_date" placeholder="Tanggal Pengambilan" required oninput="updateSummary()">
-                </div>
-                <div class="form-group">
-                    <label for="return_date">Tanggal Pengembalian</label>
-                    <input type="date" id="return_date" name="return_date" placeholder="Tanggal Pengembalian" required oninput="updateSummary()">
-                </div>
-
-            </div>
-
-            <div class="form-section self-drive-form" style="display: none;">
-                <h2>Detail Pemesanan</h2>
-                <div class="form-group">
-                    <h3>Alur Lokasi</h3>
-                    <select>
-                        <option>Lokasi Pengambilan</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select>
-                        <option>Lokasi Pengembalian</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <h3>Alur Tanggal</h3>
-                    <input type="date" placeholder="Tanggal Pengambilan">
-                </div>
-                <div class="form-group">
-                    <input type="date" placeholder="Tanggal Pengembalian">
-                </div>
-
-
-            </div>
-
-        </div>
-        <div class="summary-section sticky-summary">
-            <div class="summary-card">
-                <h2>Ringkasan Pesanan</h2>
-                <div class="car-preview">
-                    <img src="../admin/index/img/<?= $foto_mobil ?>" alt="Car Preview">
+                    </div>
                     <div class="car-details">
                         <h3><?= $nama_mobil ?></h3>
                     </div>
-                </div>
-
-                <div class="detail-row">
-                    <span>Tanggal Pengambilan</span>
-                    <span id="pickup_date_summary">-</span>
-                </div>
-                <div class="detail-row">
-                    <span>Tanggal Pengembalian</span>
-                    <span id="return_date_summary">-</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="total-section">
-            <div class="total-section-card">
-                <div class="detail-row">
+                    <div class="detail-row">
+                        <span>Tanggal Pengambilan</span>
+                        <span id="pickup_date_summary">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Tanggal Pengembalian</span>
+                        <span id="return_date_summary">-</span>
+                    </div>
+                    <!-- <div class="detail-row">
                     <strong>Total Harga</strong>
-                    <strong id="total_price">Rp0</strong>
+                    <strong class="total_price">Rp0</strong>
+                </div> -->
                 </div>
-                <input type="text" placeholder="Kode Unik Pembayaran" class="payment-input">
-                <button type="submit" class="submit-btn">BUAT PESANAN</button>
             </div>
-        </div>
+
+            <div class="total-section">
+                <div class="total-section-card">
+                    <div class="detail-row">
+                        <strong>Total Harga</strong>
+                        <strong id="total_price">Rp0</strong>
+                    </div>
+                    <input type="text" placeholder="Kode Unik Pembayaran" class="payment-input">
+                    <button type="submit" class="submit-btn">BUAT PESANAN</button>
+                </div>
+            </div>
+        </form>
     </div>
     </form>
     <div class="wave-bg"></div>
