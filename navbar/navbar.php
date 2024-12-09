@@ -4,6 +4,7 @@ include '../admin/config/config.php';
 
 // Validasi apakah pengguna sudah login
 $is_logged_in = isset($_SESSION['user1']);
+
 $namaLengkap = '';
 $email = '';
 

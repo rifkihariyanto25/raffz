@@ -18,6 +18,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </div>
 
     <?php include '../navbar/navbar.php'; ?> <!-- Memanggil file navbar.php -->
+
     <section id="hero">
         <div class="container">
             <div class="hero-content">
@@ -157,33 +158,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="../Asset/logo.png" alt="Sewa Mobil Logo">
-            </div>
-            <div class="footer-links">
-                <h3>Menu</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#daftar-mobil">Daftar Mobil</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h3>Ikuti Kami</h3>
-                <ul>
-                    <li><a href="#" aria-label="Facebook">Facebook</a></li>
-                    <li><a href="#" aria-label="Twitter">Twitter</a></li>
-                    <li><a href="#" aria-label="Instagram">Instagram</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Sewa Mobil. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include '../footer/footer.php'; ?>
 </body>
 
 </html>

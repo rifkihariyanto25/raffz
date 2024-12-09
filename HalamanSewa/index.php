@@ -1,70 +1,73 @@
 <?php
 include '../admin/config/config.php';
 
-$id_mobil = isset($_GET['id_mobil']) ? htmlspecialchars($_GET['id_mobil']) : '';
 $nama_mobil = isset($_GET['nama_mobil']) ? htmlspecialchars($_GET['nama_mobil']) : '';
 $harga_per_hari = isset($_GET['harga_per_hari']) ? htmlspecialchars($_GET['harga_per_hari']) : '';
 $foto_mobil = isset($_GET['foto_mobil']) ? htmlspecialchars($_GET['foto_mobil']) : '';
+// Mengambil data dari session pengguna
+// $email = $_SESSION['email'];
+// $namaLengkap = $_SESSION['nama_lengkap'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Data yang dimasukkan pengguna
-    $order_id = 'RAFFZ' . date('Ymd') . rand(1000, 9999);
-    $nama_lengkap = htmlspecialchars($_POST['nama_lengkap']);
-    $whatsapp = htmlspecialchars($_POST['whatsapp']);
-    $email = htmlspecialchars($_POST['email']);
-    $driver_option = htmlspecialchars($_POST['driver_option']);
-    $pickup_location = htmlspecialchars($_POST['pickup_location']);
-    $return_location = htmlspecialchars($_POST['return_location']);
-    $pickup_date = htmlspecialchars($_POST['pickup_date']);
-    $return_date = htmlspecialchars($_POST['return_date']);
-    $total_price = htmlspecialchars($_POST['total_price']);
-    $id_mobil = htmlspecialchars($_POST['id_mobil']);
+    $order_id = 'RFZ' . date('Ymd') . rand(1000, 9999);
 
-    // Cek jika ada data yang kosong
-    if (empty($nama_lengkap) || empty($whatsapp) || empty($email) || empty($pickup_date) || empty($return_date)) {
-        die("Semua data wajib diisi.");
+    // Mengambil data dari form
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $whatsapp = $_POST['whatsapp'];
+    $email = $_POST['email'];
+    $driver_option = $_POST['driver_option'];
+    $pickup_location = $_POST['pickup_location'];
+    $return_location = $_POST['return_location'];
+    $pickup_date = $_POST['pickup_date'];
+    $return_date = $_POST['return_date'];
+
+
+    // Inisialisasi nama file KTP
+    $ktp_image = NULL;
+
+    // Cek jika driver_option adalah "Lepas Kunci" dan file KTP diupload
+    if ($driver_option == "Lepas Kunci" && isset($_FILES['ktp']) && $_FILES['ktp']['error'] == 0) {
+        // Direktori tempat menyimpan file
+        $upload_dir = '../admin/index/ktp/';
+
+        // Nama file KTP baru dengan menambahkan ekstensi yang sesuai
+        $ktp_image = time() . '_' . $_FILES['ktp']['name'];
+
+        // Path lengkap untuk menyimpan file KTP
+        $upload_path = $upload_dir . $ktp_image;
+
+        // Memindahkan file dari form ke direktori upload
+        if (move_uploaded_file($_FILES['ktp']['tmp_name'], $upload_path)) {
+            // Berhasil upload, file KTP sudah disimpan
+        } else {
+            echo "Gagal mengupload file KTP.";
+            exit();
+        }
     }
 
-    // Insert query untuk menyimpan data pesanan
-    $sql = "INSERT INTO bookings (order_id, nama_lengkap, whatsapp, email, driver_option, pickup_location, return_location, pickup_date, return_date, total_price, id_mobil, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssssi", $order_id, $nama_lengkap, $whatsapp, $email, $driver_option, $pickup_location, $return_location, $pickup_date, $return_date, $total_price, $id_mobil);
+    // Menyiapkan statement SQL untuk memasukkan data
+    $sql = "INSERT INTO bookings (nama_lengkap, whatsapp, email, driver_option, pickup_location, return_location, pickup_date, return_date, ktp_image, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssss", $nama_lengkap, $whatsapp, $email, $driver_option, $pickup_location, $return_location, $pickup_date, $return_date, $ktp_image);
+
+    // Eksekusi statement
     if ($stmt->execute()) {
-        header("Location: ../HalamanPembayaran/index.php?id_booking=$order_id");
-        exit;
+        header("Location: ../HalamanPembayaran/index.php?order_id=" . $order_id);
+        exit();
     } else {
+        error_log("SQL Error: " . $stmt->error);
         echo "Terjadi kesalahan. Silakan coba lagi.";
     }
 
+    // Menutup statement dan koneksi
     $stmt->close();
     $conn->close();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset($_POST['konfirmasi'])) {
-    $booking_id = intval($_POST['id_booking']);
-    $sql = "UPDATE bookings SET status_konfirmasi = 'Sudah Dikonfirmasi' WHERE booking_id = ?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die("Error preparing statement: " . $conn->error);
-    }
-
-    $stmt->bind_param('i', $booking_id);
-
-    if ($stmt->execute()) {
-        echo "Pesanan berhasil dikonfirmasi!";
-        header("Location: manage_mobil.php#bookingPage");
-        exit;
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -76,26 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 </head>
 
 <body>
+
     <?php include '../navbar/navbar.php'; ?>
 
     <div class="container">
-        <form action="" method="POST">
-            <!-- Hidden inputs for id_mobil and total_price -->
-            <input type="hidden" name="id_mobil" value="<?= $id_mobil ?>">
-            <input type="hidden" name="total_price" id="total_price_input" value="0">
-
+        <form action="" method="POST" onsubmit="return validateDates()">
             <div class="main-content">
                 <div class="form-section">
                     <h2>Informasi Pemesan</h2>
 
                     <div class="form-group">
                         <label>Nama Lengkap</label>
-                        <input
-                            type="text"
-                            name="nama_lengkap"
-                            value="<?= $namaLengkap ?>"
-                            readonly
-                            required>
+                        <input type="text" name="nama_lengkap" value="<?= $namaLengkap ?>" readonly required>
                     </div>
 
                     <div class="form-group">
@@ -105,12 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value="<?= $email ?>"
-                            readonly
-                            required>
+                        <input type="email" name="email" value="<?= $email ?>" readonly required>
                     </div>
 
                     <div class="form-group">
@@ -126,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="form-section driver-form" style="display: none;">
@@ -149,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
                         <label for="return_date">Tanggal Pengembalian</label>
                         <input type="date" id="return_date" name="return_date" placeholder="Tanggal Pengembalian" required oninput="updateSummary()">
                     </div>
+
                 </div>
 
                 <div class="form-section self-drive-form" style="display: none;">
@@ -173,8 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
                         <input type="date" placeholder="Tanggal Pengembalian">
                     </div>
                 </div>
-            </div>
 
+            </div>
             <div class="summary-section sticky-summary">
                 <div class="summary-card">
                     <h2>Ringkasan Pesanan</h2>
@@ -201,12 +193,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
                         <strong>Total Harga</strong>
                         <strong id="total_price">Rp0</strong>
                     </div>
+                    <input type="text" placeholder="Kode Unik Pembayaran" class="payment-input">
                     <button type="submit" class="submit-btn">BUAT PESANAN</button>
                 </div>
             </div>
         </form>
     </div>
-
     <div class="wave-bg"></div>
 
     <script>
@@ -240,48 +232,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
             if (pickupDate && returnDate) {
                 const pickup = new Date(pickupDate);
                 const returnD = new Date(returnDate);
-
                 const timeDiff = returnD - pickup;
                 let daysDiff = timeDiff / (1000 * 60 * 60 * 24);
-
                 daysDiff = daysDiff >= 0 ? daysDiff + 1 : 0;
 
                 if (daysDiff > 0) {
-                    const pricePerDay = <?= $harga_per_hari ?>;
-                    const totalPrice = daysDiff * pricePerDay;
-
-                    // Update tampilan total price
-                    document.getElementById('total_price').textContent = `Rp${totalPrice.toLocaleString('id-ID')}`;
-                    // Update hidden input value
-                    document.getElementById('total_price_input').value = totalPrice;
-                } else {
-                    document.getElementById('total_price').textContent = 'Tanggal tidak valid';
-                    document.getElementById('total_price_input').value = 0;
+                    const totalPrice = daysDiff * <?= $harga_per_hari ?>;
+                    document.getElementById('total_price').textContent = "Rp" + totalPrice;
                 }
-            } else {
-                document.getElementById('total_price').textContent = 'Rp0';
-                document.getElementById('total_price_input').value = 0;
             }
         }
 
-        function initializeLocationInputs() {
-            const pickupInput = document.getElementById('pickup_location');
-            const returnInput = document.getElementById('return_location');
-
-            pickupInput.addEventListener('click', () => openLocationPicker('pickup'));
-            returnInput.addEventListener('click', () => openLocationPicker('return'));
-        }
-
-        function openLocationPicker(type) {
-            const input = document.getElementById(`${type}_location`);
-            const location = prompt('Masukkan lokasi:');
+        function openMap(type) {
+            const location = prompt("Masukkan alamat atau koordinat (latitude, longitude):");
             if (location) {
-                input.value = location;
+                if (type === 'pickup') {
+                    document.getElementById('pickup_location').value = location;
+                } else {
+                    document.getElementById('return_location').value = location;
+                }
             }
         }
 
-        document.addEventListener('DOMContentLoaded', initializeLocationInputs);
+        function validateDates() {
+            const pickupDate = new Date(document.getElementById('pickup_date').value);
+            const returnDate = new Date(document.getElementById('return_date').value);
+
+            if (returnDate <= pickupDate) {
+                alert('Tanggal pengembalian harus lebih besar dari tanggal pengambilan!');
+                return false;
+            }
+            return true;
+        }
     </script>
+
 </body>
 
 </html>
