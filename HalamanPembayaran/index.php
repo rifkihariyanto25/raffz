@@ -115,7 +115,7 @@ $payment_deadline = date('H:i A', strtotime('+60 minutes', $created_time));
 
         function confirmPayment(orderId) {
             // Kirim ke halaman konfirmasi atau proses pembayaran
-            window.location.href = 'process_payment.php?order_id=' + orderId;
+            window.location.href = '../midtrans/examples/snap/simple.php?id_booking=$order_id';
         }
 
         // Timer countdown

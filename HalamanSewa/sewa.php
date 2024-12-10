@@ -7,7 +7,7 @@ $harga_per_hari = isset($_GET['harga_per_hari']) ? htmlspecialchars($_GET['harga
 $foto_mobil = isset($_GET['foto_mobil']) ? htmlspecialchars($_GET['foto_mobil']) : '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Data yang dimasukkan pengguna
+
     $order_id = 'RAFFZ' . date('Ymd') . rand(1000, 9999);
     $nama_lengkap = htmlspecialchars($_POST['nama_lengkap']);
     $whatsapp = htmlspecialchars($_POST['whatsapp']);
@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssssssssi", $order_id, $nama_lengkap, $whatsapp, $email, $driver_option, $pickup_location, $return_location, $pickup_date, $return_date, $total_price, $id_mobil);
 
     if ($stmt->execute()) {
-        header("Location: ../HalamanPembayaran/index.php?id_booking=$order_id");
+        header("Location: ../midtrans/examples/snap/simple.php?id_booking=$order_id");
+
         exit;
     } else {
         echo "Terjadi kesalahan. Silakan coba lagi.";

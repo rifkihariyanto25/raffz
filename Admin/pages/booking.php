@@ -1,50 +1,73 @@
 <?php
 
+
+// Include Midtrans config and library files
+require_once '../config/config.php';
+require_once __DIR__ . '/../../midtrans/examples/notification-handler.php';  // Path to the Midtrans library
+
+// Set your Midtrans server key (sandbox or production) in the Config class, not an object
+\Midtrans\Config::$serverKey = 'SB-Mid-server-dvOaJBd7FgZMQus1K7EutjPN'; // Replace with your server key
+\Midtrans\Config::$clientKey = 'SB-Mid-client-oyLsocrltTJE_7W9'; // Replace with your client key
+\Midtrans\Config::$isProduction = false; // Set to true for production environment
+\Midtrans\Config::$isSanitized = true;
+\Midtrans\Config::$is3ds = true;
+
+
+
+// Fetch booking data
 $booking_result = $conn->query("SELECT * FROM bookings");
 
-// Fungsi konfirmasi booking
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset($_POST['konfirmasi'])) {
-    $booking_id = intval($_POST['id_booking']);
-    $sql = "UPDATE bookings SET status_konfirmasi = 'Sudah Dikonfirmasi' WHERE booking_id = ?";
-    $stmt = $conn->prepare($sql);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['id_booking']) && isset($_POST['konfirmasi'])) {
+        // Confirm booking
+        $booking_id = intval($_POST['id_booking']);
+        $sql = "UPDATE bookings SET status_konfirmasi = 'Sudah Dikonfirmasi' WHERE booking_id = ?";
+        $stmt = $conn->prepare($sql);
 
-    if ($stmt === false) {
-        die("Error preparing statement: " . $conn->error);
+        if ($stmt === false) {
+            die("Error preparing statement: " . $conn->error);
+        }
+
+        $stmt->bind_param('i', $booking_id);
+
+        if ($stmt->execute()) {
+            echo "<script>
+    alert('Pesanan berhasil dikonfirmasi!');
+    window.location.href = 'index.php#bookingPage';
+</script>";
+            exit;
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
-    $stmt->bind_param('i', $booking_id);
+    if (isset($_POST['id_booking']) && isset($_POST['hapus'])) {
+        // Delete booking
+        $booking_id = intval($_POST['id_booking']);
 
-    if ($stmt->execute()) {
-        echo "<script>alert('Pesanan berhasil dikonfirmasi!'); window.location.href='index.php#bookingPage';</script>";
-        exit;
-    } else {
-        echo "Error: " . $stmt->error;
+        $sql = "DELETE FROM bookings WHERE booking_id = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error preparing statement: " . $conn->error);
+        }
+
+        $stmt->bind_param('i', $booking_id);
+
+        if ($stmt->execute()) {
+            echo "<script>
+    alert('Pesanan berhasil dihapus!');
+    window.location.href = 'index.php#bookingPage';
+</script>";
+            exit;
+        } else {
+            echo "Gagal menghapus data: " . $stmt->error;
+        }
+
+        $stmt->close();
     }
-
-    $stmt->close();
-}
-
-// Fungsi hapus booking
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset($_POST['hapus'])) {
-    $booking_id = intval($_POST['id_booking']);
-
-    $sql = "DELETE FROM bookings WHERE booking_id = ?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die("Error preparing statement: " . $conn->error);
-    }
-
-    $stmt->bind_param('i', $booking_id);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Pesanan berhasil dihapus!'); window.location.href='index.php#bookingPage';</script>";
-        exit;
-    } else {
-        echo "Gagal menghapus data: " . $stmt->error;
-    }
-
-    $stmt->close();
 }
 
 ?>
