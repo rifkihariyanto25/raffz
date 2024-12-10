@@ -1,16 +1,12 @@
 <?php
-// Include file konfigurasi database
+
 include '../admin/config/config.php';
 
-// Mendapatkan email pengguna dari session atau URL parameter
-// Asumsi pengguna sudah login dan email disimpan di session
 
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
-// Filter status jika ada parameter status
 $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
 
-// Query untuk mengambil riwayat pesanan berdasarkan email dan status (jika ada)
 $query = "SELECT * FROM bookings WHERE email = ?";
 if ($status_filter !== 'all') {
     $query .= " AND status_pesanan = ?";
@@ -23,12 +19,10 @@ if ($status_filter !== 'all') {
     $stmt->bind_param("s", $email);
 }
 
-// Menjalankan query
 $stmt->execute();
 $result = $stmt->get_result();
 $pesanan = $result->fetch_all(MYSQLI_ASSOC);
 
-// Menutup statement dan koneksi
 $stmt->close();
 $conn->close();
 ?>
@@ -152,7 +146,6 @@ $conn->close();
                 const detailContent = card.querySelector('.detail-content');
                 const arrow = this.innerHTML.includes('▼') ? '▲' : '▼';
 
-                // Menampilkan atau menyembunyikan detail
                 detailContent.classList.toggle('active');
                 this.innerHTML = `Detail Pesanan ${arrow}`;
             });

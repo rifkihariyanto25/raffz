@@ -1,10 +1,8 @@
 <?php
 include '../admin/config/config.php';
 
-// Ambil id_booking dari URL
 $order_id = isset($_GET['id_booking']) ? $_GET['id_booking'] : '';
 
-// Query untuk mengambil data booking dan data mobil
 $sql = "SELECT b.*, m.nama_mobil, m.foto_mobil 
         FROM bookings b
         LEFT JOIN mobil m ON b.id_mobil = m.id_mobil
@@ -16,7 +14,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $booking = $result->fetch_assoc();
 
-// Hitung batas waktu pembayaran (60 menit dari waktu pemesanan)
 $created_time = strtotime($booking['created_at']);
 $payment_deadline = date('H:i A', strtotime('+60 minutes', $created_time));
 
