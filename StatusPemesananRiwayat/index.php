@@ -2,14 +2,18 @@
 
 include '../admin/config/config.php';
 
-
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
+// Filter berdasarkan status
 $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
 
-$query = "SELECT * FROM bookings WHERE email = ?";
+// Query untuk mengambil data booking dan data mobil
+$query = "SELECT b.*, m.nama_mobil, m.foto_mobil, m.harga_per_hari FROM bookings b
+          JOIN mobil m ON b.id_mobil = m.id_mobil
+          WHERE b.email = ?";
+
 if ($status_filter !== 'all') {
-    $query .= " AND status_pesanan = ?";
+    $query .= " AND b.status_pesanan = ?";
 }
 
 $stmt = $conn->prepare($query);
@@ -25,6 +29,7 @@ $pesanan = $result->fetch_all(MYSQLI_ASSOC);
 
 $stmt->close();
 $conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +57,7 @@ $conn->close();
                     <div class="order-header">
                         <div class="car-info">
                             <h3><?= htmlspecialchars($order['nama_mobil']) ?></h3>
-                            <img src="../admin/index/img/<?= htmlspecialchars($order['foto_mobil']) ?>" alt="Foto mobil <?= htmlspecialchars($order['nama_mobil']) ?>">
+                            <img src="../admin/uploads/<?= htmlspecialchars($order['foto_mobil']) ?>" alt="Foto mobil <?= htmlspecialchars($order['nama_mobil']) ?>" class="car-image">
                         </div>
                         <div class="order-details">
                             <div class="info-grid">
@@ -97,7 +102,7 @@ $conn->close();
                                     <p><?= htmlspecialchars($order['driver_option']) ?></p>
                                 </div>
                                 <div class="info-item">
-                                    <p class="price">Rp<?= number_format($order['harga_total'], 0, ',', '.') ?></p>
+                                    <p class="price">Rp<?= number_format($order['harga_per_hari'], 0, ',', '.') ?></p>
                                     <button class="detail-toggle">Detail Pesanan ▼</button>
                                 </div>
                             </div>

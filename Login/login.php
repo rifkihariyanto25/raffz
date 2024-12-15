@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
 
         // Redirect ke halaman sebelumnya atau homepage
         $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '../Homepage/homepage.php';
-        header("Location: ../HalamanSewa/sewa.php");
+        header("Location: /github/index.php");
         exit();
     } else {
         $error_message = "Email atau password salah.";

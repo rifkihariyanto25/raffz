@@ -64,13 +64,15 @@ $is_logged_in = isset($_SESSION['user1']) && $_SESSION['user1'] === true;
                                 </svg></i></li>
                     </ul>
                     <a href="<?= $is_logged_in
-                                    ? '../HalamanSewa/sewa.php?nama_mobil=' . urlencode($mobil['nama_mobil']) .
+                                    ? '../HalamanSewa/sewa.php?id_mobil=' . urlencode($mobil['id_mobil']) .
+                                    '&nama_mobil=' . urlencode($mobil['nama_mobil']) .
                                     '&harga_per_hari=' . urlencode($mobil['harga_per_hari']) .
                                     '&foto_mobil=' . urlencode($mobil['foto_mobil'])
                                     : '../Login/login.php?redirect_to=' . urlencode($_SERVER['REQUEST_URI'])
                                 ?>" class="rent-btn">
                         Sewa Sekarang
                     </a>
+
 
 
                 </div>

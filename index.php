@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/admin/config/config.php';
+
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffz Car - Homepage</title>
-    <link rel="stylesheet" href="homepage.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="Homepage/homepage.css?v=<?php echo time(); ?>" />
 </head>
 
 <body>
@@ -17,7 +19,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="loader"></div>
     </div>
 
-    <?php include '../navbar/navbar.php'; ?> <!-- Memanggil file navbar.php -->
+    <?php include 'navbar/navbar.php'; ?>
 
     <section id="hero">
         <div class="container">
@@ -26,7 +28,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <p>NYAMAN, CEPAT &</p>
                 <p>DOMPET TETAP SELAMAT</p>
             </div>
-            <img src="../Asset/Ngengeng.png" alt="Car">
+            <img src="Asset/Ngengeng.png" alt="Car">
         </div>
     </section>
 
@@ -39,17 +41,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </p>
         <div class="feature-grid">
             <div class="feature-card">
-                <img src="../Asset/image (3).png" alt="Konsultasi">
+                <img src="Asset/image (3).png" alt="Konsultasi">
                 <h3>Konsultasi Pemesanan</h3>
                 <p>Kami siap membantu Anda menemukan mobil yang tepat untuk kebutuhan Anda.</p>
             </div>
             <div class="feature-card">
-                <img src="../Asset/image (4).png" alt="Asuransi">
+                <img src="Asset/image (4).png" alt="Asuransi">
                 <h3>Bersiap Sama dengan Asuransi</h3>
                 <p>Semua mobil kami dilengkapi dengan asuransi untuk keamanan dan kenyamanan Anda.</p>
             </div>
             <div class="feature-card">
-                <img src="../Asset/image (5).png" alt="Mobil Terawat">
+                <img src="Asset/image (5).png" alt="Mobil Terawat">
                 <h3>Mobil Terawat dan Teruji</h3>
                 <p>Kami menjamin semua mobil dalam kondisi prima dan siap untuk perjalanan Anda.</p>
             </div>
@@ -110,17 +112,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <p>Butuh kendaraan nyaman? Berikut Rekomendasi Mobil Terbaik Yang Kami Sewakan</p>
         <div class="testimonial-grid">
             <div class="testimonial-card">
-                <img src="../Asset/karina.png" alt="Dimas Fauzi Maulana">
+                <img src="Asset/karina.png" alt="Dimas Fauzi Maulana">
                 <h3>Dimas Fauzi Maulana</h3>
                 <p>"Sangat puas dengan layanan sewa mobil ini. Mobil bersih dan terawat, proses pemesanan mudah."</p>
             </div>
             <div class="testimonial-card">
-                <img src="../Asset/gibran3.png" alt="Fikri Rabbani Hariyanto">
+                <img src="Asset/gibran3.png" alt="Fikri Rabbani Hariyanto">
                 <h3>Fikri Rabbani Hariyanto</h3>
                 <p>"Harga terjangkau dan pelayanan ramah. Pasti akan menggunakan jasa ini lagi."</p>
             </div>
             <div class="testimonial-card">
-                <img src="../Asset/hitler.png" alt="Muhammad Nur Fendiki">
+                <img src="Asset/hitler.png" alt="Muhammad Nur Fendiki">
                 <h3>Muhammad Nur Fendiki</h3>
                 <p>"Mobil yang disewakan dalam kondisi prima. Sangat direkomendasikan!"</p>
             </div>
@@ -158,7 +160,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </section>
     </main>
 
-    <?php include '../footer/footer.php'; ?>
+    <?php include 'footer/footer.php'; ?>
 </body>
 
 </html>
@@ -179,11 +181,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
             // Jika pengguna belum login, arahkan ke halaman login
             console.log("Pengguna belum login");
             alert("Silakan login terlebih dahulu untuk menyewa mobil.");
-            window.location.href = "../HalamanSewa/sewa.php";
+            window.location.href = "HalamanSewa/sewa.php";
         } else {
             // Jika pengguna sudah login, arahkan ke halaman sewa
             console.log("Pengguna sudah login");
-            window.location.href = "../HalamanSewa/sewa.php";
+            window.location.href = "HalamanSewa/sewa.php";
         }
     }
 </script>

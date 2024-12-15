@@ -2,88 +2,109 @@
 
 namespace Midtrans;
 
+// Load required files
+require_once __DIR__ . '/../../admin/config/config.php';
+require_once __DIR__ . '/../../admin/config/status_constants.php';
 require_once dirname(__FILE__) . '/../Midtrans.php';
 
-Config::$isProduction = false;
-Config::$serverKey = 'SB-Mid-server-dvOaJBd7FgZMQus1K7EutjPN';
+// Konfigurasi Midtrans
+Config::$isProduction = false; // Ubah ke true untuk produksi
+Config::$serverKey = 'SB-Mid-server-dvOaJBd7FgZMQus1K7EutjPN'; // Ganti dengan server key Anda
 
-printExampleWarningMessage();
+// File untuk logging
+$logFile = dirname(__FILE__) . '/notification.log';
+
+// Fungsi untuk menulis log
+function writeLog($message)
+{
+    global $logFile;
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[$timestamp] $message\n", FILE_APPEND);
+}
 
 try {
-    $notif = new Notification();
-} catch (\Exception $e) {
-    logError($e->getMessage());
-    exit("Error: " . $e->getMessage());
-}
+    $notification = new Notification();
 
-$notifResponse = $notif->getResponse();
+    // Mendapatkan data respon notifikasi dari Midtrans
+    /** @var \stdClass $response */
+    $response = $notification->getResponse();
+    writeLog("Raw response: " . json_encode($response));
 
-if (is_object($notifResponse)) {
-    $transaction = $notifResponse->transaction_status;
-    $type = $notifResponse->payment_type;
-    $order_id = $notifResponse->order_id;
-    $fraud = $notifResponse->fraud_status;
-} else {
-    logError("Invalid response format from Midtrans.");
-    exit("Invalid response format.");
-}
+    // Memeriksa format respons
+    if (!is_object($response)) {
+        throw new \Exception('Invalid notification response format');
+    }
 
-include '../../../admin/config/config.php';
+    // Mengambil data dari response dan mengecek properti yang ada
+    $transaction = property_exists($response, 'transaction_status') ? $response->transaction_status : '';
+    $type = property_exists($response, 'payment_type') ? $response->payment_type : '';
+    $order_id = property_exists($response, 'order_id') ? $response->order_id : '';
+    $fraud = property_exists($response, 'fraud_status') ? $response->fraud_status : '';
+    $gross_amount = property_exists($response, 'gross_amount') ? $response->gross_amount : 0;
 
-$stmt = $conn->prepare("UPDATE bookings SET status_konfirmasi = ? WHERE order_id = ?");
+    writeLog("Processing notification - Order ID: $order_id, Status: $transaction");
 
-$status = getTransactionStatus($transaction, $type, $fraud);
+    // Validasi data yang diperlukan
+    if (empty($order_id) || empty($transaction)) {
+        throw new \Exception('Missing required notification fields');
+    }
 
-$stmt->bind_param("ss", $status, $order_id);
-if ($stmt->execute()) {
-    echo "Payment status for order_id: " . $order_id . " updated to: " . $status;
-} else {
-    logError("Failed to update payment status for order_id: " . $order_id);
-    echo "Failed to update payment status.";
-}
+    // Tentukan status berdasarkan transaction_status
+    $status = '';
+    switch ($transaction) {
+        case 'capture':
+            $status = ($type == 'credit_card' && $fraud == 'challenge') ? STATUS_CHALLENGE : STATUS_SUCCESS;
+            break;
+        case 'settlement':
+            $status = STATUS_SETTLEMENT;
+            break;
+        case 'pending':
+            $status = STATUS_PENDING;
+            break;
+        case 'deny':
+            $status = STATUS_DENIED;
+            break;
+        case 'expire':
+            $status = STATUS_EXPIRED;
+            break;
+        case 'cancel':
+            $status = STATUS_CANCELLED;
+            break;
+        default:
+            $status = STATUS_PENDING;
+    }
 
-$stmt->close();
-$conn->close();
+    // Update database dengan status yang diterima
+    if (!empty($status) && !empty($order_id)) {
+        $sql = "UPDATE bookings SET status_konfirmasi = ? WHERE order_id = ?";
+        $stmt = $conn->prepare($sql);
 
-function getTransactionStatus($transaction, $type, $fraud)
-{
-    if ($transaction == 'capture') {
-        if ($type == 'credit_card') {
-            return ($fraud == 'challenge') ? 'Challenge by FDS' : 'Success';
+        if (!$stmt) {
+            throw new \Exception("Failed to prepare statement: " . $conn->error);
         }
-    } else if ($transaction == 'settlement') {
-        return 'Settlement';
-    } else if ($transaction == 'pending') {
-        return 'Pending';
-    } else if ($transaction == 'deny') {
-        return 'Denied';
-    } else if ($transaction == 'expire') {
-        return 'Expired';
-    } else if ($transaction == 'cancel') {
-        return 'Cancelled';
-    }
-    return 'Unknown';
-}
 
-function logError($message)
-{
-    $logFile = dirname(__FILE__) . '/notification-error.log';
-    file_put_contents($logFile, date('Y-m-d H:i:s') . " - " . $message . "\n", FILE_APPEND);
-}
+        $stmt->bind_param("ss", $status, $order_id);
 
-function printExampleWarningMessage()
-{
-    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-        echo 'Notification-handler are not meant to be opened via browser / GET HTTP method. It is used to handle Midtrans HTTP POST notification / webhook.';
-        exit;
+        if ($stmt->execute()) {
+            writeLog("Status updated successfully for order $order_id to $status");
+            http_response_code(200);
+            echo json_encode(['status' => 'success', 'message' => "Status updated successfully"]);
+        } else {
+            throw new \Exception("Failed to update status: " . $stmt->error);
+        }
+
+        $stmt->close();
+    } else {
+        throw new \Exception("Invalid status or order_id received");
     }
-    if (strpos(Config::$serverKey, 'SB-Mid-server-dvOaJBd7FgZMQus1K7EutjPN') !== false) {
-        echo "<code>";
-        echo "<h4>key</h4>";
-        echo "In file: " . __FILE__;
-        echo "<br>";
-        echo "<br>";
-        echo htmlspecialchars('Config::$serverKey = SB-Mid-server-dvOaJBd7FgZMQus1K7EutjPN;');
-        die();
+} catch (\Exception $e) {
+    // Menangani error dan mencatat log
+    writeLog("Error processing notification: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+} finally {
+    // Menutup koneksi database jika ada
+    if (isset($conn)) {
+        $conn->close();
     }
 }

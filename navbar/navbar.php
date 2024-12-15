@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../admin/config/config.php';
+require_once __DIR__ . '/../admin/config/config.php';
 
 // Validasi apakah pengguna sudah login
 $is_logged_in = isset($_SESSION['user1']);
@@ -13,7 +13,7 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
     $userId = $_SESSION['user1']['id'];
     $query = "SELECT nama_depan, nama_belakang, email FROM user1 WHERE id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('i', $userId); // 'i' untuk tipe data integer
+    $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
@@ -367,20 +367,20 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
 <header>
     <nav>
         <div class="logo">
-            <img src="../Asset/logo.png" alt="Raffz Car Logo">
+            <img src="/github/Asset/logo.png" alt="Raffz Car Logo">
         </div>
         <ul>
-            <li class="<?php echo $current_page == 'homepage.php' ? 'active' : ''; ?>">
-                <a href="../Homepage/homepage.php">Home</a>
+            <li class="<?php echo $current_page == 'index.php' ? 'active' : ''; ?>">
+                <a href="/github/index.php">Home</a>
             </li>
             <li class="<?php echo $current_page == 'daftarmobildb.php' ? 'active' : ''; ?>">
-                <a href="../Listmobil/daftarmobildb.php">Daftar Mobil</a>
+                <a href="/github/Listmobil/daftarmobildb.php">Daftar Mobil</a>
             </li>
             <li class="<?php echo $current_page == 'about.php' ? 'active' : ''; ?>">
-                <a href="../Aboutpage/about.php">About</a>
+                <a href="/github/Aboutpage/about.php">About</a>
             </li>
             <li class="<?php echo $current_page == 'Kontak.php' ? 'active' : ''; ?>">
-                <a href="../Kontak/Kontak.php">Contact</a>
+                <a href="/github/Kontak/Kontak.php">Contact</a>
             </li>
         </ul>
         <button class="user-icon" onclick="openForm()">
@@ -474,21 +474,20 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
 
         if (loginButton) {
             loginButton.addEventListener('click', function() {
-                window.location.href = '../Login/login.php';
+                window.location.href = '/github/Login/login.php';
             });
         }
 
         if (registerButton) {
             registerButton.addEventListener('click', function() {
-                window.location.href = '../SignUp/register.php';
+                window.location.href = '/github/SignUp/register.php';
             });
         }
 
         const logoutButton = document.querySelector('.action-button.logout');
         if (logoutButton) {
             logoutButton.addEventListener('click', function() {
-                // Lakukan proses logout
-                window.location.href = '../Login/logout.php';
+                window.location.href = '/github/Login/logout.php';
             });
         }
     });

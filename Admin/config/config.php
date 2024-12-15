@@ -1,5 +1,8 @@
 <?php
 
+define('BASE_PATH', dirname(dirname(dirname(__FILE__))));
+define('ASSET_PATH', '../../Asset');
+
 $host = "localhost";
 $user = "root";
 $password = "";
