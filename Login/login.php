@@ -14,18 +14,17 @@ if (isset($_POST['login'])) {
     $user = $result->fetch_assoc();
 
     if ($user && password_verify($password, $user['password'])) {
-        // Simpan informasi pengguna ke sesi
         $_SESSION['user1'] = $user;
+        $_SESSION['user_id'] = $user['id'];
 
         // Redirect ke halaman sebelumnya atau homepage
-        $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '../Homepage/homepage.php';
-        header("Location: /github/index.php");
+        $redirect_to = isset($_GET['redirect_to']) ? $_GET['redirect_to'] : '/github/index.php';
+        header("Location: $redirect_to");
         exit();
     } else {
         $error_message = "Email atau password salah.";
     }
 }
-
 
 ?>
 

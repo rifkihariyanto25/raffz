@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require_once __DIR__ . '/../admin/config/config.php';
 
 // Validasi apakah pengguna sudah login
@@ -23,6 +23,7 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -402,7 +403,7 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
 
             <div class="popup-actions">
                 <button class="action-button">
-                    <span class="icon">&#8634;</span> <a href="../StatusPemesananRiwayat/index.php" class="no-underline">Riwayat Pesanan</a>
+                    <span class="icon">&#8634;</span> <a href="/github/StatusPemesananRiwayat/index.php" class="no-underline">Riwayat Pesanan</a>
                 </button>
                 <button class="action-button logout">
                     <span class="fas fa-sign-out-alt"></span> Keluar

@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 define('BASE_PATH', dirname(dirname(dirname(__FILE__))));
 define('ASSET_PATH', '../../Asset');
 

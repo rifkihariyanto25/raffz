@@ -1,5 +1,15 @@
 <?php
-include '../admin/config/config.php';
+
+require_once '../admin/config/config.php';
+
+// Memastikan session ada
+if (!isset($_SESSION['user_id'])) {
+    die("Anda harus login terlebih dahulu.");
+}
+
+// Ambil id_user dari session
+$id_user = $_SESSION['user_id'];
+
 
 $id_mobil = isset($_GET['id_mobil']) ? htmlspecialchars($_GET['id_mobil']) : '';
 $nama_mobil = isset($_GET['nama_mobil']) ? htmlspecialchars($_GET['nama_mobil']) : '';
@@ -14,13 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama_lengkap = htmlspecialchars($_POST['nama_lengkap']);
     $whatsapp = htmlspecialchars($_POST['whatsapp']);
     $email = htmlspecialchars($_POST['email']);
-    $driver_option = htmlspecialchars($_POST['driver_option']);
     $pickup_location = htmlspecialchars($_POST['pickup_location']);
     $return_location = htmlspecialchars($_POST['return_location']);
     $pickup_date = htmlspecialchars($_POST['pickup_date']);
     $return_date = htmlspecialchars($_POST['return_date']);
     $total_price = htmlspecialchars($_POST['total_price']);
     $id_mobil = htmlspecialchars($_POST['id_mobil']);
+    $special_notes = htmlspecialchars($_POST['special_notes']);
 
     // File Upload Handling
     $ktp_image = '';
@@ -58,12 +68,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Semua data wajib diisi, termasuk upload KTP dan SIM.");
     }
 
-    // Insert query untuk menyimpan data pesanan
-    $sql = "INSERT INTO bookings (order_id, nama_lengkap, whatsapp, email, driver_option, pickup_location, return_location, pickup_date, return_date, total_price, id_mobil, ktp_image, sim_image, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssssssss", $order_id, $nama_lengkap, $whatsapp, $email, $driver_option, $pickup_location, $return_location, $pickup_date, $return_date, $total_price, $id_mobil, $ktp_image, $sim_image);
+    // Insert query untuk menyimpan data pesanan, termasuk id_user
+    $sql = "INSERT INTO bookings (order_id, nama_lengkap, whatsapp, email, pickup_location, return_location, pickup_date, return_date, total_price, id_mobil, ktp_image, sim_image, id_user, special_notes, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssssssss", $order_id, $nama_lengkap, $whatsapp, $email, $pickup_location, $return_location, $pickup_date, $return_date, $total_price, $id_mobil, $ktp_image, $sim_image, $id_user, $special_notes);
     if ($stmt->execute()) {
         header("Location: ../midtrans/examples/snap/simple.php?id_booking=$order_id");
         exit;
@@ -74,8 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -90,6 +100,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include '../navbar/navbar.php'; ?>
 
     <form action="" method="POST" enctype="multipart/form-data">
+
+        <!-- <input type="hidden" name="id_user" value="<?= $_SESSION['id_user']; ?>"> -->
         <input type="hidden" name="id_mobil" value="<?= $id_mobil ?>">
         <input type="hidden" name="total_price" id="total_price_input" value="0">
         <div class="main-container">
@@ -163,7 +175,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="form-group">
                         <label>Catatan Khusus</label>
-                        <textarea name="special_notes" rows="3"></textarea>
+                        <textarea name="special_notes" rows="3" id="special_notes" maxlength="200" oninput="checkWordCount(this)"></textarea>
+                        <small id="word-counter" style="color: #666; font-size: 12px;">0/20 kata</small>
                     </div>
                 </div>
 
@@ -282,6 +295,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 const fileName = simInput.files[0]?.name || "Tidak ada file yang dipilih";
                 simFileInfo.textContent = fileName;
             });
+        });
+
+        function checkWordCount(textarea) {
+            const text = textarea.value;
+            const words = text.trim().split(/\s+/);
+            const wordCount = text.trim() === '' ? 0 : words.length;
+            const wordCounter = document.getElementById('word-counter');
+
+            wordCounter.textContent = `${wordCount}/20 kata`;
+
+            if (wordCount > 20) {
+                // Potong teks menjadi 20 kata saja
+                textarea.value = words.slice(0, 20).join(' ');
+                wordCounter.textContent = '20/20 kata';
+                wordCounter.style.color = 'red';
+            } else {
+                wordCounter.style.color = '#666';
+            }
+        }
+
+        // Tambahkan ke dalam event listener yang sudah ada
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... kode yang sudah ada ...
+
+            const specialNotes = document.getElementById('special_notes');
+            if (specialNotes) {
+                specialNotes.addEventListener('paste', (e) => {
+                    setTimeout(() => checkWordCount(specialNotes), 0);
+                });
+            }
         });
     </script>
     <div class="wave-bottom"></div>

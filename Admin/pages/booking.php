@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id_booking']) && isset
 
 ?>
 
-<!-- CSS styling untuk status -->
 <style>
     .status {
         padding: 8px 12px;
