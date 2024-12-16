@@ -155,3 +155,51 @@ textarea:hover {
 .contact-info:hover {
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
 }
+
+/* Tambahkan di akhir file CSS */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        padding: 20px 10px;
+    }
+
+    .contact-content {
+        flex-direction: column;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-row input {
+        width: 100%;
+    }
+
+    .contact-form,
+    .contact-info {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .contact-info iframe {
+        width: 100%;
+    }
+
+    .contact-title {
+        font-size: 2em;
+    }
+
+    .contact-subtitle {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-title {
+        font-size: 1.8em;
+    }
+
+    .contact-subtitle {
+        font-size: 1em;
+    }
+}

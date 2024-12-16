@@ -29,6 +29,9 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -125,9 +128,66 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
             background-color: #f0f0f0;
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            color: #007BFF;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+        }
+
         .user-icon i {
             color: #007BFF;
             font-size: 16px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Mobile menu */
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu ul li {
+            margin: 10px 0;
+        }
+
+        .mobile-menu ul li a {
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+        }
+
+        /* Show mobile menu when active */
+        .mobile-menu.active {
+            display: block;
+            position: absolute;
+            top: 50px;
+            /* Adjust as needed */
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            z-index: 1000;
         }
 
         /* Improved Modal Popup Styling */
@@ -286,6 +346,79 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
             display: inline-block;
             /* Buat elemen inline tetap dalam tombol */
         }
+
+        @media (max-width: 480px) {
+
+            /* Ubah posisi logo agar berada di kiri */
+            nav {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 15px;
+            }
+
+            .navbar-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .logo {
+                flex-grow: 1;
+            }
+
+            /* Gaya untuk hamburger dan user icon supaya berada di kanan */
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                color: #007BFF;
+                gap: 5px;
+                margin-left: auto;
+                /* Mengatur posisi ke kanan */
+                background: none;
+                border: none;
+                cursor: pointer;
+                gap: 5px;
+                padding: 10px;
+            }
+
+            .user-icon {
+                margin-left: 15px;
+                padding: 8px;
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+                /* Menyesuaikan ukuran ikon */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: #f0f0f0;
+                cursor: pointer;
+            }
+
+            .user-icon i {
+                font-size: 18px;
+            }
+
+        }
+
+        form-popup {
+
+            /* Gaya yang lebih kecil untuk popup di mobile */
+            .form-container {
+                width: 200px;
+                /* Ukuran kotak lebih kecil */
+                padding: 15px;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                background-color: white;
+            }
+        }
     </style>
 
     <style>
@@ -370,23 +503,51 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
         <div class="logo">
             <img src="/github/Asset/logo.png" alt="Raffz Car Logo">
         </div>
-        <ul>
+        <ul class="nav-links">
             <li class="<?php echo $current_page == 'index.php' ? 'active' : ''; ?>">
                 <a href="/github/index.php">Home</a>
             </li>
+
             <li class="<?php echo $current_page == 'daftarmobildb.php' ? 'active' : ''; ?>">
                 <a href="/github/Listmobil/daftarmobildb.php">Daftar Mobil</a>
             </li>
+
             <li class="<?php echo $current_page == 'about.php' ? 'active' : ''; ?>">
                 <a href="/github/Aboutpage/about.php">About</a>
             </li>
+
             <li class="<?php echo $current_page == 'Kontak.php' ? 'active' : ''; ?>">
                 <a href="/github/Kontak/Kontak.php">Contact</a>
             </li>
         </ul>
+        <button class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
         <button class="user-icon" onclick="openForm()">
             <i class="fas fa-user"></i>
         </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li class="<?php echo $current_page == 'index.php' ? 'active' : ''; ?>">
+                    <a href="/github/index.php">Home</a>
+                </li>
+
+                <li class="<?php echo $current_page == 'daftarmobildb.php' ? 'active' : ''; ?>">
+                    <a href="/github/Listmobil/daftarmobildb.php">Daftar Mobil</a>
+                </li>
+
+                <li class="<?php echo $current_page == 'about.php' ? 'active' : ''; ?>">
+                    <a href="/github/Aboutpage/about.php">About</a>
+                </li>
+
+                <li class="<?php echo $current_page == 'Kontak.php' ? 'active' : ''; ?>">
+                    <a href="/github/Kontak/Kontak.php">Contact</a>
+                </li>
+            </ul>
+        </div>
 
         <div class="form-popup" id="myForm" <?= $is_logged_in ?>
             <div class="form-container">
@@ -405,6 +566,7 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
                 <button class="action-button">
                     <span class="icon">&#8634;</span> <a href="/github/StatusPemesananRiwayat/index.php" class="no-underline">Riwayat Pesanan</a>
                 </button>
+
                 <button class="action-button logout">
                     <span class="fas fa-sign-out-alt"></span> Keluar
                 </button>
@@ -439,7 +601,17 @@ if ($is_logged_in && isset($_SESSION['user1']['id'])) {
         </div>
 </header>
 
+
 <script>
+    function toggleMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu.style.display === 'block') {
+            mobileMenu.style.display = 'none';
+        } else {
+            mobileMenu.style.display = 'block';
+        }
+    }
+
     function checkLoginStatus() {
 
         const isLoggedIn = <?php echo json_encode($is_logged_in); ?>; // Menggunakan json_encode untuk memastikan nilai boolean

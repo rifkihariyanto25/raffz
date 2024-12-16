@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    padding-top: 100px;
+    background-color: #f8f9fa;
+}
+
+.main-container {
+    display: flex;
+    padding: 2rem 4rem;
+    gap: 2rem;
+    position: relative;
+}
+
+/* Responsif untuk tablet dan layar kecil */
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+        /* Menumpuk elemen secara vertikal pada layar kecil */
+        padding: 1rem;
+        /* Mengurangi padding */
+    }
+}
+
+.form-section {
+    flex: 2;
+}
+
+.summary-section {
+    flex: 1;
+}
+
+/* Sticky summary */
+.sticky-summary {
+    top: 100px;
+    position: sticky;
+    z-index: 100;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 350px;
+    height: 350px;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .sticky-summary {
+        width: 100%;
+        /* Lebar 100% pada layar kecil */
+        height: auto;
+        /* Mengatur tinggi otomatis */
+        position: relative;
+        /* Menghilangkan sticky pada layar kecil */
+        margin-top: 1rem;
+    }
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+        font-size: 1rem;
+        /* Meningkatkan ukuran font pada layar kecil */
+    }
+}
+
+.file-upload {
+    margin-top: 1rem;
+}
+
+.file-upload button {
+    background: #ff6b35;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-info {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.car-preview {
+    background: #1a237e;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.car-image {
+    width: 100%;
+    height: auto;
+}
+
+.car-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.summary-details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.summary-details div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.total-section {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.total-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.payment-dropdown {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 1rem;
+    background: #ff6b35;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.terms {
+    display: flex;
+    align-items: start;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.terms a {
+    color: #ff6b35;
+    text-decoration: none;
+}
+
+.wave-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: #1a237e;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+    z-index: -1;
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .file-upload-container {
+        margin-bottom: 1rem;
+    }
+
+    .file-label {
+        font-size: 0.9rem;
+    }
+
+    .file-upload-wrapper {
+        flex-direction: column;
+        /* Mengubah arah kolom menjadi vertikal */
+        align-items: stretch;
+    }
+
+    .file-upload-button {
+        width: 100%;
+        /* Membuat tombol upload memenuhi lebar layar */
+    }
+
+    .file-info {
+        font-size: 0.9rem;
+    }
+
+    .file-hint {
+        font-size: 0.7rem;
+    }
+
+    .note-warning {
+        font-size: 0.8rem;
+    }
+}

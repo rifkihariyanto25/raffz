@@ -8,7 +8,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raffz Car</title>
-    <link rel="stylesheet" href="about.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -17,18 +17,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <!-- Car Gallery Section remains the same -->
     <section class="car-gallery">
-        <h1 class="gallery-title">RAFFZ CAR</h1>
+        <!-- <h1 class="gallery-title">RAFFZ CAR</h1> -->
         <div class="gallery-grid">
-            <div class="gallery-item">
+            <h1 class="gallery-text1">RAFFZ CAR</h1>
+            <p class="gallery-text2"> Melayani dengan Sepenuh Hati</p>
+            <div class="gallery-item1">
                 <img src="../Asset/4.png" alt="Car Service">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item2">
                 <img src="../Asset/3.png" alt="Car Fleet">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item3">
                 <img src="../Asset/2.png" alt="Car Lineup">
             </div>
-            <div class="gallery-item">
+            <div class="gallery-item4">
                 <img src="../Asset/1.png" alt="Car Service Staff">
             </div>
         </div>
@@ -36,54 +38,56 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <!-- Updated Team Section for 5 members -->
     <section class="team-section">
-        <h2 class="team-title">Tim Kami</h2>
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="member-image">
-                    <img src="../Asset/Ripks.png" alt="Team Member 3">
+        <div class="team-container">
+            <h2 class="team-title">Tim Kami</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../Asset/Ripks.png" alt="Team Member 3">
+                    </div>
+                    <div class="member-info">
+                        <h3>Rifki Aditya Hariyanto</h3>
+                        <p>Project Manajer</p>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <h3>Rifki Aditya Hariyanto</h3>
-                    <p>Project Manajer</p>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../Asset/akbara.png" alt="Team Member 1">
+                    </div>
+                    <div class="member-info">
+                        <h3>Raihan Akbar Rabbani</h3>
+                        <p>Software tester</p>
+                    </div>
                 </div>
-            </div>
-            <div class="team-member">
-                <div class="member-image">
-                    <img src="../Asset/akbara.png" alt="Team Member 1">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../Asset/gwehj.png" alt="Team Member 2">
+                    </div>
+                    <div class="member-info">
+                        <h3>Muhammad Fikri Fauzi</h3>
+                        <p>Front End Developer</p>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <h3>Raihan Akbar Rabbani</h3>
-                    <p>Software tester</p>
-                </div>
-            </div>
-            <div class="team-member">
-                <div class="member-image">
-                    <img src="../Asset/gwehj.png" alt="Team Member 2">
-                </div>
-                <div class="member-info">
-                    <h3>Muhammad Fikri Fauzi</h3>
-                    <p>Front End Developer</p>
-                </div>
-            </div>
 
-        </div>
-        <div class="team-bottom-row">
-            <div class="team-member">
-                <div class="member-image">
-                    <img src="../Asset/pendol.png" alt="Team Member 4">
-                </div>
-                <div class="member-info">
-                    <h3>Fendi Nur Maulam</h3>
-                    <p>Back End Developer</p>
-                </div>
             </div>
-            <div class="team-member">
-                <div class="member-image">
-                    <img src="../Asset/jaktod.png" alt="Team Member 5">
+            <div class="team-bottom-row">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../Asset/pendol.png" alt="Team Member 4">
+                    </div>
+                    <div class="member-info">
+                        <h3>Fendi Nur Maulam</h3>
+                        <p>Back End Developer</p>
+                    </div>
                 </div>
-                <div class="member-info">
-                    <h3>Muhamad Dimas Nurzaky</h3>
-                    <p>Designer UI UX</p>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../Asset/jaktod.png" alt="Team Member 5">
+                    </div>
+                    <div class="member-info">
+                        <h3>Muhamad Dimas Nurzaky</h3>
+                        <p>Designer UI UX</p>
+                    </div>
                 </div>
             </div>
         </div>

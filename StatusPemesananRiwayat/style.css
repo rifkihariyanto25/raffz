@@ -15,7 +15,7 @@ body {
     padding: 100px;
 }
 
-
+/* Title and subtitle styles */
 .title {
     font-size: 24px;
     margin-bottom: 8px;
@@ -26,6 +26,7 @@ body {
     margin-bottom: 24px;
 }
 
+/* Order Card Styles */
 .order-card {
     background: white;
     border-radius: 12px;
@@ -230,4 +231,91 @@ body {
     text-decoration: none;
     font-size: 14px;
     display: block;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 60px;
+    }
+
+    .order-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .car-info {
+        width: 100%;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 40px 20px;
+    }
+
+    .order-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .car-info {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .order-details {
+        margin-top: 20px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .catatan textarea {
+        width: 100%;
+        min-height: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+
+    .order-header {
+        padding: 10px;
+        gap: 16px;
+    }
+
+    .car-info {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .detail-content {
+        padding: 10px;
+    }
+
+    .detail-toggle {
+        font-size: 12px;
+    }
 }

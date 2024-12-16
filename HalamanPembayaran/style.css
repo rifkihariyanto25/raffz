@@ -9,27 +9,38 @@ body {
   background-color: #f5f5f5;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1088%26quot%3b)' fill='none'%3e%3cpath d='M 0%2c178 C 96%2c227.2 288%2c412.8 480%2c424 C 672%2c435.2 768%2c248.8 960%2c234 C 1152%2c219.2 1344%2c326.8 1440%2c350L1440 560L0 560z' fill='rgba(40%2c 47%2c 99%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1088'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
   background-size: cover;
+  background-repeat: no-repeat;
+  /* Menghindari pengulangan gambar */
+  background-attachment: fixed;
+  /* Membuat background tetap saat scrolling */
+  background-position: center;
+  /* Menjaga posisi gambar di tengah */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
-
-
 
 .main-content {
   display: flex;
+  flex-wrap: wrap;
+  /* Agar elemen otomatis menumpuk di layar kecil */
   gap: 2rem;
 }
 
 .left-section {
   flex: 1;
+  min-width: 300px;
+  /* Membatasi lebar minimum untuk tata letak */
 }
 
 .right-section {
-  width: 380px;
+  flex: 1;
+  max-width: 380px;
+  width: 100%;
+  /* Agar memenuhi lebar layar kecil */
 }
 
 .card {
@@ -47,7 +58,7 @@ body {
 }
 
 .section-title2 {
-  color: white;
+  color: black;
 }
 
 .timer-section {
@@ -84,7 +95,7 @@ body {
 }
 
 .copy-button {
-  color: #ef4444;
+  color: #ff6b00;
   background: none;
   border: none;
   cursor: pointer;
@@ -99,7 +110,7 @@ body {
 
 .submit-button {
   width: 100%;
-  background: #ef4444;
+  background: #ff6b00;
   color: white;
   padding: 0.75rem;
   border: none;
@@ -132,4 +143,63 @@ body {
 
 .dates span {
   color: #111827;
+}
+
+/* Animasi Button */
+.submit-button:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* Tambahkan Media Query untuk Responsivitas */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    /* Menumpuk elemen secara vertikal */
+  }
+
+  .right-section {
+    max-width: 100%;
+    /* Memenuhi lebar layar */
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    /* Ukuran font lebih kecil */
+  }
+
+  .card {
+    padding: 1rem;
+    /* Mengurangi padding untuk layar kecil */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+    /* Mengurangi padding untuk layar yang lebih kecil */
+  }
+
+  .section-title {
+    font-size: 1rem;
+    /* Ukuran font lebih kecil lagi */
+  }
+
+  .submit-button {
+    padding: 0.5rem;
+    /* Sesuaikan ukuran tombol */
+  }
+}
+
+/* Tambahan Responsivitas Khusus */
+@media (max-width: 360px) {
+  .section-title {
+    font-size: 0.9rem;
+    /* Ukuran font lebih kecil untuk layar sangat kecil */
+  }
+
+  .card {
+    padding: 0.75rem;
+  }
 }

@@ -149,6 +149,61 @@ html {
     margin-bottom: 0.5rem;
 }
 
+/* Responsif untuk Section Features */
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+        /* Ubah menjadi satu kolom pada tablet dan layar kecil */
+        gap: 2rem;
+        /* Kurangi jarak antar elemen */
+    }
+
+    #features {
+        padding: 2rem 2rem;
+        /* Kurangi padding agar lebih cocok di layar kecil */
+    }
+
+    .feature-card img {
+        width: 100%;
+        /* Gambar akan menyesuaikan lebar kontainer */
+        height: auto;
+        /* Jaga proporsi gambar */
+    }
+
+    #features h2 {
+        font-size: 1.8rem;
+        /* Perkecil ukuran font judul */
+    }
+
+    #features p {
+        font-size: 1rem;
+        /* Perkecil ukuran font paragraf */
+    }
+}
+
+@media (max-width: 480px) {
+    #features {
+        padding: 1.5rem 1rem;
+        /* Padding lebih kecil untuk layar ponsel */
+    }
+
+    #features h2 {
+        font-size: 1.5rem;
+        /* Ukuran judul lebih kecil */
+    }
+
+    .feature-card {
+        padding: 0.5rem;
+        /* Kurangi padding pada kartu */
+    }
+
+    .feature-card img {
+        height: 150px;
+        /* Tetapkan tinggi gambar agar lebih proporsional */
+    }
+}
+
+
 .rekomendasi-mobil {
     background-color: #ffffff;
     padding: 50px 15px;
@@ -321,7 +376,6 @@ html {
 /* Desain responsif */
 @media (max-width: 768px) {
 
-    .feature-grid,
     .car-grid,
     .testimonial-grid,
     .faq-grid {

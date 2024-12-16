@@ -6,35 +6,19 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     line-height: 1.6;
     color: #333;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1600' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1296%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient1297%26quot%3b)'%3e%3c/rect%3e%3cpath d='M 0%2c54 C 72%2c87.8 216%2c211.8 360%2c223 C 504%2c234.2 576%2c114.2 720%2c110 C 864%2c105.8 936%2c207.6 1080%2c202 C 1224%2c196.4 1368%2c106 1440%2c82L1440 560L0 560z' fill='%23184a7e'%3e%3c/path%3e%3cpath d='M 0%2c288 C 96%2c324.6 288%2c445.6 480%2c471 C 672%2c496.4 768%2c420.6 960%2c415 C 1152%2c409.4 1344%2c437.4 1440%2c443L1440 560L0 560z' fill='%232264ab'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1296'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='100%25' y1='50%25' x2='0%25' y2='50%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1297'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(4%2c 88%2c 196%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
     background-color: #333;
-    /* Warna background utama */
     background-size: cover;
     background-attachment: fixed;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Tambahkan padding-top pada body untuk mengkompensasi fixed header */
-body {
     padding-top: 100px;
-    /* Sesuaikan dengan tinggi header */
+    /* Mengkompensasi fixed header */
 }
 
-/* Menyesuaikan gaya hero untuk navbar baru */
 #hero {
     padding-top: 120px;
-    /* Memberikan ruang untuk navbar */
-    background-color: #000022;
-    /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1600' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1296%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='url(%26quot%3b%23SvgjsLinearGradient1297%26quot%3b)'%3e%3c/rect%3e%3cpath d='M 0%2c54 C 72%2c87.8 216%2c211.8 360%2c223 C 504%2c234.2 576%2c114.2 720%2c110 C 864%2c105.8 936%2c207.6 1080%2c202 C 1224%2c196.4 1368%2c106 1440%2c82L1440 560L0 560z' fill='%23184a7e'%3e%3c/path%3e%3cpath d='M 0%2c288 C 96%2c324.6 288%2c445.6 480%2c471 C 672%2c496.4 768%2c420.6 960%2c415 C 1152%2c409.4 1344%2c437.4 1440%2c443L1440 560L0 560z' fill='%232264ab'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1296'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='100%25' y1='50%25' x2='0%25' y2='50%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1297'%3e%3cstop stop-color='%230e2a47' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(4%2c 88%2c 196%2c 1)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"); */
-    background-image: url();
     background-attachment: fixed;
     background-size: cover;
     color: #fff;
@@ -62,43 +46,22 @@ body {
 .hero-content h2 {
     text-align: center;
     margin: 0 auto;
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 1.2;
 }
 
 .hero-content h2 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     margin-top: 0.5rem;
 }
 
-/* Gaya lainnya tetap sama... */
-
-/* Desain responsif */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    nav ul {
-        margin-top: 15px;
-    }
-
-    nav ul li {
-        margin: 10px 0;
-    }
-
-    .user-icon {
-        margin-top: 15px;
-    }
-
-    #hero {
-        padding-top: 200px;
-        /* Menyesuaikan padding-top untuk layout mobile */
-    }
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-
+/* Bagian daftar mobil */
 .cars-list {
     background-color: #f0f0f0;
     padding: 3rem 3rem;
@@ -106,78 +69,90 @@ body {
     gap: 10px;
 }
 
-.cars-list p {
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 5px;
-}
-
 .cars-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .car-card {
-    background-color: #F3F5F9;
-    border-radius: 15px;
-    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
 }
 
 .car-card img {
-    width: 50%;
-    height: 30%;
-    max-width: 250px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .car-card h4 {
-    margin-top: 10px;
-    font-size: 1.25rem;
-    color: #1F3A73;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
 }
 
 .car-card p {
+    font-size: 16px;
+    color: #555;
     margin: 5px 0;
-    color: #0C1F47;
 }
 
-.car-features {
-    list-style-type: none;
-    margin: 0 auto;
+.car-card .car-features {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
     padding: 0;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
-.car-features li {
+.car-card .car-features .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.car-card .rent-btn {
     display: inline-block;
-    margin-right: 10px;
-}
-
-.rent-btn {
-    background-color: #FF6B00;
-    color: white;
-    padding: 10px 20px;
+    margin-top: auto;
+    background-color: #ff6b00;
+    color: #fff;
     text-decoration: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    margin-top: 10px;
-    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.rent-btn:hover {
-    background-color: #FF4500;
+.car-card .rent-btn:hover {
+    background-color: #0056b3;
 }
 
+/* Bagian FAQ */
 .faq {
     padding: 50px;
-    background-color: #F3F5F9;
+    background-color: #f3f5f9;
 }
 
 .faq-content {
     display: flex;
     justify-content: space-between;
-    gap: 18rem;
+    gap: 3rem;
+    /* Kurangi gap agar lebih responsif */
+    flex-wrap: wrap;
+    /* Membungkus elemen agar tidak terpotong di layar kecil */
 }
 
 .faq-text {
@@ -189,7 +164,7 @@ body {
 }
 
 .faq-questions h4 {
-    color: #1F3A73;
+    color: #1f3a73;
     margin-bottom: 10px;
 }
 
@@ -197,8 +172,89 @@ body {
     margin-bottom: 20px;
 }
 
+/* Aturan untuk layar kecil (responsif) */
+@media (max-width: 768px) {
+    .cars-container {
+        flex-direction: column;
+        /* Atur satu kolom pada layar kecil */
+    }
+
+    .car-card {
+        width: 100%;
+        /* Lebar penuh untuk kartu di layar kecil */
+        padding: 15px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin-bottom: 20px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* FAQ Responsif */
+    .faq-content {
+        flex-direction: column;
+        gap: 2rem;
+        /* Mengurangi jarak antar elemen di layar kecil */
+    }
+
+    .faq-questions h4 {
+        font-size: 1.2rem;
+        /* Sesuaikan ukuran teks */
+    }
+
+    .faq-questions p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-title {
+        font-size: 1.4rem;
+    }
+
+    .faq-container {
+        padding: 0 1rem;
+    }
+
+    .faq-questions h4 {
+        font-size: 1rem;
+    }
+
+    .faq-questions p {
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+
+    .faq-questions p {
+        word-break: break-word;
+        /* Hindari teks meluas ke luar layar */
+        line-height: 1.5;
+    }
+}
+
+/* Aturan untuk layar besar (desktop) */
+@media (min-width: 1024px) {
+    .cars-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .car-card {
+        max-width: 280px;
+    }
+}
+
 footer {
-    background-color: #FF6B35;
+    background-color: #ff6b35;
     color: white;
     padding: 40px 20px;
 }
@@ -259,26 +315,4 @@ footer {
     color: white;
     text-decoration: none;
     font-size: 20px;
-}
-
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .footer-logo {
-        margin-bottom: 20px;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
-    }
 }

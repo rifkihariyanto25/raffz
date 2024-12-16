@@ -1,0 +1,413 @@
+/* Previous styles remain the same until team section */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    background-size: cover;
+}
+
+
+
+/* Car Gallery Section */
+.car-gallery {
+    padding-top: 100px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.gallery-grid {
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr); */
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid img {
+    width: 80%;
+}
+
+/* .gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+  } */
+
+.gallery-text1 {
+    /* width: 50%;
+    height: 200px; */
+    color: #333;
+    font-size: 2.5em;
+    margin-top: 75px;
+    margin-left: 35px;
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.gallery-text2 {
+    color: #333;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 145px;
+    margin-left: 25px;
+    padding: 0;
+    grid-column: 3;
+    grid-row: 1 / 2;
+}
+
+.gallery-item1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.gallery-item2 {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.gallery-item3 {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+}
+
+.gallery-item4 {
+    grid-column: 3 / span 3;
+    grid-row: 3;
+}
+
+/* .gallery-title {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #333;
+  } */
+
+/* Updated Team Section for 5 members */
+.team-section {
+    background-color: #282f63;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.team-title {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.team-bottom-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 800px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+}
+
+.team-member {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: #ff5722;
+}
+
+.member-image {
+    position: absolute;
+    top: -40px;
+    left: -20px;
+    right: -20px;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-info {
+    position: absolute;
+    bottom: -15px;
+    left: 20px;
+    right: 20px;
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    z-index: 2;
+}
+
+.member-info h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.member-info p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faq-title {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    background-color: #ff6b35;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.footer-section h3 {
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Media Queries untuk Tablet */
+@media (max-width: 768px) {
+    /* Navigasi */
+
+    /* Grid Galeri Mobil */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .gallery-grid img {
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery-text1,
+    .gallery-text2 {
+        font-size: 1.2em;
+        margin: 10px 0;
+        text-align: center;
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .gallery-item1,
+    .gallery-item2,
+    .gallery-item3,
+    .gallery-item4 {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    /* Team Section */
+    .team-grid,
+    .team-bottom-row {
+        grid-template-columns: 1fr;
+        /* Ubah menjadi satu kolom */
+        gap: 20px;
+        /* Kurangi jarak antar elemen */
+    }
+
+    .team-member {
+        margin: 0 auto;
+        width: 90%;
+        /* Batasi lebar kotak anggota tim */
+    }
+
+    .member-image {
+        top: 0;
+        /* Pastikan gambar sejajar dengan kotak */
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        /* Tambahkan sedikit lengkungan */
+    }
+
+    .member-info {
+        position: relative;
+        bottom: 0;
+        /* Sesuaikan dengan proporsi */
+        padding: 10px;
+    }
+
+    .member-info h3 {
+        font-size: 18px;
+        /* Sesuaikan ukuran font */
+    }
+
+    .member-info p {
+        font-size: 14px;
+        /* Sesuaikan ukuran deskripsi */
+    }
+}
+
+/* Media Queries untuk HP */
+@media (max-width: 480px) {
+    /* .logo img {
+      height: 30px;
+    } */
+
+    /* Grid Galeri Mobil */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 5px;
+        gap: 15px;
+    }
+
+    .gallery-grid img {
+        width: 100%;
+        height: auto;
+    }
+
+    .gallery-text1,
+    .gallery-text2 {
+        font-size: 1em;
+        margin: 5px 0;
+    }
+
+    /* Team Section */
+
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+    }
+
+    .team-bottom-row {
+        grid-template-columns: repeat(2, 1fr);
+        width: 70%;
+    }
+
+    .member-info {
+        width: 90%;
+        bottom: -75px;
+        left: 5px;
+        right: 15px;
+    }
+
+    .member-info h3 {
+        font-size: 8px;
+        /* Ukuran lebih kecil */
+    }
+
+    .member-info p {
+        font-size: 6px;
+    }
+
+    /* FAQ Section */
+    .faq-grid {
+        grid-template-columns: 2fr;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+/* Updated Responsive Design for 5 team members
+  @media (max-width: 992px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .team-bottom-row {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .footer-content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .member-image {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .team-grid,
+    .team-bottom-row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  
+    .member-image {
+      height: 300px;
+    }
+  } */
